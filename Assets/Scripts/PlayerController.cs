@@ -7,9 +7,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _moveSpeed = 5;
     [SerializeField] float _jumpPower = 5f;
     [SerializeField] float _groundRayLength = 1f; //接地判定用のRayの長さ
+    [SerializeField] Vector3 _rayDistance = Vector3.zero;
+    [SerializeField] LayerMask _groundLayer;
 
     Vector3 _dir;
     Rigidbody _rb;
+    bool isGround;
 
     void Start()
     {
@@ -19,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         InputMove();
         UpdateMove();
+        IsGround();
     }
 
     void InputMove()
@@ -30,12 +34,16 @@ public class PlayerController : MonoBehaviour
     }
     void UpdateMove()
     {
-        if (_dir == Vector3.zero)
+        if (_dir == Vector3.zero)//止まっているとき
         {
             _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
         }
         else
         {
+            if (!isGround)
+            {
+                return;
+            }
             _dir = Camera.main.transform.TransformDirection(_dir); //カメラを基準に座標をとる
             _dir.y = 0;
 
@@ -45,6 +53,19 @@ public class PlayerController : MonoBehaviour
             Vector3 move = _dir.normalized * _moveSpeed;　//移動
             move.y = _rb.velocity.y;
             _rb.velocity = move;
+        }
+    }
+    void IsGround()
+    {
+        Debug.DrawLine(this.transform.position, this.transform.position + _rayDistance, Color.red);
+
+        if (Physics.Linecast(this.transform.position, this.transform.position + _rayDistance, _groundLayer))
+        {
+            isGround = true;
+        }
+        else
+        {
+            isGround = false;
         }
     }
 }

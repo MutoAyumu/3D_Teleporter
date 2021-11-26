@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PortalScript : MonoBehaviour
 {
     [SerializeField] LayerMask _wallLayer = default;
     [SerializeField] float _RayLength = 5f;
     [SerializeField] float _hitRayOffset = 0.01f;
-    [SerializeField] Image[] _portalImage = default;
+    [SerializeField] Canvas[] _portalImage = default;
     int _count;
     bool isTeleport;
+    RaycastHit hit;
 
     private void Update()
     {
@@ -24,8 +26,6 @@ public class PortalScript : MonoBehaviour
     }
     void SetPortal()
     {
-        RaycastHit hit;
-
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, _RayLength, _wallLayer))
         {
             Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
