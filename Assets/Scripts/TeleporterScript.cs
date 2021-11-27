@@ -8,12 +8,22 @@ public class TeleporterScript : MonoBehaviour
     [SerializeField] AudioSource _teleportAudio = default;
     [SerializeField] Transform _teleportPos = default;
     [SerializeField] PortalScript _portal;
+    Transform _currentPos;
+    float _currentDirection;
 
+    public Transform TeleportPos { get => _teleportPos; set => _teleportPos = value; }
+
+    private void Start()
+    {
+        _currentPos = this.transform;
+        _currentDirection = 180 - this.transform.rotation.y;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(_playerTag))
         {
-            _portal.Teleport(other, _teleportPos);
+            _currentDirection = TeleportPos.rotation.y - 90;
+            _portal.Teleport(other, TeleportPos, _currentDirection);
 
             if (_teleportAudio)
                 _teleportAudio.Play();
