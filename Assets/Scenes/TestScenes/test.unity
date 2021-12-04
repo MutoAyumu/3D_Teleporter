@@ -5344,6 +5344,9 @@ MonoBehaviour:
   _teleportAudio: {fileID: 0}
   _teleportPos: {fileID: 998495274}
   _portal: {fileID: 1393451794}
+  _wallCollider: {fileID: 786059515}
+  _currentPos: {fileID: 0}
+  _currentDirection: 0
 --- !u!1 &748329213
 GameObject:
   m_ObjectHideFlags: 0
@@ -5670,7 +5673,7 @@ GameObject:
   - component: {fileID: 786059515}
   m_Layer: 8
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6249,6 +6252,9 @@ MonoBehaviour:
   _teleportAudio: {fileID: 0}
   _teleportPos: {fileID: 2128894412}
   _portal: {fileID: 1393451794}
+  _wallCollider: {fileID: 786059515}
+  _currentPos: {fileID: 0}
+  _currentDirection: 0
 --- !u!1 &998495273
 GameObject:
   m_ObjectHideFlags: 0
@@ -6779,20 +6785,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393451789}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62d37f551cbe750499c6d6efc8314c27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallLayer:
+  _otherPortal: {fileID: 0}
+  _outlineRenderer: {fileID: 0}
+  _portalColor: {r: 0, g: 0, b: 0, a: 0}
+  _placementMask:
     serializedVersion: 2
-    m_Bits: 256
-  _RayLength: 15
-  _hitRayOffset: 0.01
-  _portalImage:
-  - {fileID: 943503463}
-  - {fileID: 737218658}
-  _player: {fileID: 1393451791}
+    m_Bits: 0
+  _testTransform: {fileID: 0}
 --- !u!1 &1396095293
 GameObject:
   m_ObjectHideFlags: 0

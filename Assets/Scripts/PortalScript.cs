@@ -1,83 +1,194 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Cinemachine;
 
 public class PortalScript : MonoBehaviour
 {
-    [SerializeField] LayerMask _wallLayer = default;
-    [SerializeField] float _RayLength = 5f;
-    [SerializeField] float _hitRayOffset = 0.01f;
-    [SerializeField] RawImage[] _portalImage = default;
-    [SerializeField] PlayerController _player;
-    
-    TeleporterScript _teleporter1;
-    TeleporterScript _teleporter2;
-    int _count;
-    bool isTeleport;
-    RaycastHit hit;
+    [SerializeField] PortalScript _otherPortal = default;
+    [SerializeField] Renderer _outlineRenderer = default;
+    [SerializeField] Color _portalColor = default;
+    [SerializeField] LayerMask _placementMask = default;
+    [SerializeField] Transform _testTransform = default;
+
+    bool isPlaced;
+    Collider _wallCollider = default;
+    Renderer _renderer = default;
+    Collider _collider = default;
+    List<PortalableObject> _portalObjects = new List<PortalableObject>();
+
+    public PortalScript OtherPortal { get => _otherPortal; set => _otherPortal = value; }
+    public Color PortalColor { get => _portalColor; set => _portalColor = value; }
+    public bool IsPlaced { get => isPlaced; set => isPlaced = value; }
+    public Renderer Renderer { get => _renderer; set => _renderer = value; }
+
+    private void Awake()
+    {
+        _collider = GetComponent<Collider>();
+        _renderer = GetComponent<Renderer>();
+    }
     private void Start()
     {
-        _teleporter1 = _portalImage[0].GetComponent<TeleporterScript>();
-        _teleporter2 = _portalImage[1].GetComponent<TeleporterScript>();
+        _outlineRenderer.material.SetColor("_OutlineColour", PortalColor);
+        gameObject.SetActive(false);
     }
-
     private void Update()
     {
-        SetPortal();
+        Renderer.enabled = OtherPortal.IsPlaced;
 
-        if (!Input.GetButtonDown("Cancel"))
+        for(int i = 0; i < _portalObjects.Count; ++i)
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
-    void SetPortal()
-    {
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, _RayLength, _wallLayer))
-        {
-            Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
-            Debug.DrawRay(hit.point, hit.normal, Color.green);
+            Vector3 obj = transform.InverseTransformPoint(_portalObjects[i].transform.position);
 
-            if(Input.GetButtonDown("Fire1"))
+            if(obj.z > 0.0f)
             {
-                _count++;
-
-                if (_count % 2 != 0)
-                {
-                    _teleporter1.TeleportPos.transform.rotation = Quaternion.LookRotation(hit.normal);
-                    _portalImage[0].transform.rotation = Quaternion.LookRotation(hit.normal);
-                    _portalImage[0].transform.position = hit.point + (hit.normal * _hitRayOffset);
-                }
-                else
-                {
-                    _teleporter2.TeleportPos.transform.rotation = Quaternion.LookRotation(hit.normal);
-                    _portalImage[1].transform.rotation = Quaternion.LookRotation(hit.normal);
-                    _portalImage[1].transform.position = hit.point + (hit.normal * _hitRayOffset);
-                }
+                _portalObjects[i].Warp();
             }
         }
     }
-    void ResetPortal()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        var obj = other.GetComponent<PortalableObject>();
+
+        if(obj != null)
+        {
+            _portalObjects.Add(obj);
+            obj.SetInPortal(this, OtherPortal, _wallCollider);
+        }
     }
-    /// <summary>テレポート用の関数</summary>
-    /// <param name="other"></param>
-    /// <param name="Pos"></param>
-    public void Teleport(Collider other, Transform Pos, float dir)
+    private void OnTriggerExit(Collider other)
     {
-        if (!isTeleport)//入った時
+        var obj = other.GetComponent<PortalableObject>();
+
+        if(_portalObjects.Contains(obj))
         {
-            isTeleport = true;
-            other.transform.position = Pos.transform.position;
-            _player.ChangeRotation(dir);
+            _portalObjects.Remove(obj);
+            obj.ExitPortal(_wallCollider);
         }
-        else//出たとき
+    }
+    public bool PlacePortal(Collider wallCollider, Vector3 pos, Quaternion rot)
+    {
+        _testTransform.position = pos;
+        _testTransform.rotation = rot;
+        _testTransform.position -= _testTransform.forward * 0.001f;
+
+        FixOverhangs();
+        FixIntersects();
+
+        if(CheckOverlap())
         {
-            isTeleport = false;
+            _wallCollider = wallCollider;
+            transform.position = _testTransform.position;
+            transform.rotation = _testTransform.rotation;
+
+            gameObject.SetActive(true);
+            IsPlaced = true;
+            return true;
         }
-        Debug.Log("in");
+
+        return false;
+    }
+    void FixOverhangs()
+    {
+        var testPoints = new List<Vector3>
+        {
+            new Vector3(-1.1f,  0.0f, 0.1f),
+            new Vector3( 1.1f,  0.0f, 0.1f),
+            new Vector3( 0.0f, -2.1f, 0.1f),
+            new Vector3( 0.0f,  2.1f, 0.1f)
+        };
+
+        var testDirs = new List<Vector3>
+        {
+             Vector3.right,
+            -Vector3.right,
+             Vector3.up,
+            -Vector3.up
+        };
+
+        for(int i = 0; i < 4; ++i)
+        {
+            RaycastHit hit;
+            Vector3 rayPos = _testTransform.TransformPoint(testPoints[i]);
+            Vector3 rayDir = _testTransform.TransformDirection(testDirs[i]);
+
+            if(Physics.CheckSphere(rayPos, 0.05f, _placementMask))
+            {
+                break;
+            }
+            else if(Physics.Raycast(rayPos, rayDir, out hit, 2.1f, _placementMask))
+            {
+                var offset = hit.point - rayPos;
+                _testTransform.Translate(offset, Space.World);
+            }
+        }
+    }
+    void FixIntersects()
+    {
+        var testDirs = new List<Vector3>
+        {
+             Vector3.right,
+            -Vector3.right,
+             Vector3.up,
+            -Vector3.up
+        };
+
+        var testDists = new List<float> { 1.1f, 1.1f, 2.1f, 2.1f };
+
+        for (int i = 0; i < 4; ++i)
+        {
+            RaycastHit hit;
+            Vector3 rayPos = _testTransform.TransformPoint(0.0f, 0.0f, -0.1f);
+            Vector3 rayDir = _testTransform.TransformDirection(testDirs[i]);
+
+            if (Physics.Raycast(rayPos, rayDir, out hit, testDists[i], _placementMask))
+            {
+                var offset = (hit.point - rayPos);
+                var newOffset = -rayDir * (testDists[i] - offset.magnitude);
+                _testTransform.Translate(newOffset, Space.World);
+            }
+        }
+    }
+    bool CheckOverlap()
+    {
+        var checkExtents = new Vector3(0.9f, 1.9f, 0.05f);
+
+        var checkPositions = new Vector3[]
+        {
+            _testTransform.position + _testTransform.TransformVector(new Vector3( 0.0f,  0.0f, -0.1f)),
+
+            _testTransform.position + _testTransform.TransformVector(new Vector3(-1.0f, -2.0f, -0.1f)),
+            _testTransform.position + _testTransform.TransformVector(new Vector3(-1.0f,  2.0f, -0.1f)),
+            _testTransform.position + _testTransform.TransformVector(new Vector3( 1.0f, -2.0f, -0.1f)),
+            _testTransform.position + _testTransform.TransformVector(new Vector3( 1.0f,  2.0f, -0.1f)),
+
+            _testTransform.TransformVector(new Vector3(0.0f, 0.0f, 0.2f))
+        };
+
+        // ポータルが壁と交差しないようする
+        var intersections = Physics.OverlapBox(checkPositions[0], checkExtents, _testTransform.rotation, _placementMask);
+
+        if (intersections.Length > 1)
+        {
+            return false;
+        }
+        else if (intersections.Length == 1)
+        {
+            // 古いPortalと交差している時
+            if (intersections[0] != _collider)
+            {
+                return false;
+            }
+        }
+
+        // Portalの端が表面に重なるようにする
+        bool isOverlapping = true;
+
+        for (int i = 1; i < checkPositions.Length - 1; ++i)
+        {
+            isOverlapping &= Physics.Linecast(checkPositions[i],
+                checkPositions[i] + checkPositions[checkPositions.Length - 1], _placementMask);
+        }
+
+        return isOverlapping;
     }
 }
