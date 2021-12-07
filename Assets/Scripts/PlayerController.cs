@@ -4,32 +4,55 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>プレイヤーにつける</summary>
-public class PlayerController : MonoBehaviour
+public class PlayerController : PortalableObject
 {
-    [SerializeField] float _moveSpeed = 5;
-    [SerializeField] float _jumpPower = 5f;
-    [SerializeField] Vector3 _rayDistance = Vector3.zero;//接地判定用のRayの方向
-    [SerializeField] LayerMask _groundLayer;
-    [SerializeField] Transform _eye;
-    [SerializeField] string _portalTag = "";
-    [SerializeField] AxisState _aimH;
-    [SerializeField] AxisState _aimV;
+    [Space(10), Header("CameraMove")]
+    [SerializeField]float _cameraSpeed = 3f;
+    [SerializeField, Tooltip("XがMin　YがMax")] Vector2 _cameraValue = Vector2.zero;
+    [SerializeField] float _slerpSpeed = 15f;
+    [SerializeField] Transform _eye = default;
+    [Space(10), Header("PlayerMove")]
+    [SerializeField] float _moveSpeed = 3f;
+    [Space(10), Header("IsGround")]
+    [SerializeField] Transform _footPos = default;
+    [SerializeField] Vector3 _rayDistance = Vector3.zero;
+    [SerializeField] LayerMask _groundLayer = default;
 
+    Quaternion _targetRotation;
     Vector3 _dir;
     Rigidbody _rb;
     bool isGround;
 
-    void Start()
+    public Quaternion TargetRotation { get => _targetRotation; set => _targetRotation = value; }
+    protected override void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.Locked;
+        TargetRotation = this.transform.rotation;
     }
-    void Update()
+    private void Update()
     {
+        CameraMove();
         InputMove();
         UpdateMove();
         IsGround();
     }
-    /// <summary>動きの入力</summary>
+    /// <summary>カメラの回転を制御する</summary>
+    void CameraMove()
+    {
+        var rotation = new Vector2(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
+        var targetEuler = TargetRotation.eulerAngles + (Vector3)rotation * _cameraSpeed;
+
+        if(targetEuler.x > 180.0f)
+        {
+            targetEuler.x -= 360.0f;
+        }
+
+        targetEuler.x = Mathf.Clamp(targetEuler.x, _cameraValue.x, _cameraValue.y);//指定した範囲の値に制限する為
+        TargetRotation = Quaternion.Euler(targetEuler);//回転用のQuaternionを作成
+
+        _eye.rotation = Quaternion.Slerp(_eye.rotation, TargetRotation, Time.deltaTime * _slerpSpeed);
+    }
     void InputMove()
     {
         float h = Input.GetAxisRaw("Horizontal");
@@ -40,14 +63,6 @@ public class PlayerController : MonoBehaviour
     /// <summary>動きの更新</summary>
     void UpdateMove()
     {
-        _aimH.Update(Time.deltaTime);
-        _aimV.Update(Time.deltaTime);
-        var aimRotationH = Quaternion.AngleAxis(_aimH.Value, Vector3.up);
-        var aimRotationV = Quaternion.AngleAxis(_aimV.Value, Vector3.right);
-
-        _eye.localRotation = aimRotationV;
-        this.transform.rotation = aimRotationH;
-
         if (_dir == Vector3.zero)//止まっているとき
         {
             _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
@@ -70,9 +85,9 @@ public class PlayerController : MonoBehaviour
     /// <summary>接地判定</summary>
     void IsGround()
     {
-        Debug.DrawLine(this.transform.position, this.transform.position + _rayDistance, Color.red);
+        Debug.DrawLine(_footPos.position, _footPos.position + _rayDistance, Color.red);
 
-        if (Physics.Linecast(this.transform.position, this.transform.position + _rayDistance, _groundLayer))
+        if (Physics.Linecast(_footPos.position, _footPos.position + _rayDistance, _groundLayer))
         {
             isGround = true;
         }
@@ -80,9 +95,5 @@ public class PlayerController : MonoBehaviour
         {
             isGround = false;
         }
-    }
-    public void ChangeRotation(float dir)
-    {
-        _aimH.Value = dir;
     }
 }

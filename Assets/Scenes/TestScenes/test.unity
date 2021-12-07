@@ -5340,13 +5340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3834d556a90b0754d9d4c3574a014a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTag: Player
-  _teleportAudio: {fileID: 0}
-  _teleportPos: {fileID: 998495274}
-  _portal: {fileID: 1393451794}
-  _wallCollider: {fileID: 786059515}
-  _currentPos: {fileID: 0}
-  _currentDirection: 0
 --- !u!1 &748329213
 GameObject:
   m_ObjectHideFlags: 0
@@ -6248,13 +6241,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3834d556a90b0754d9d4c3574a014a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTag: Player
-  _teleportAudio: {fileID: 0}
-  _teleportPos: {fileID: 2128894412}
-  _portal: {fileID: 1393451794}
-  _wallCollider: {fileID: 786059515}
-  _currentPos: {fileID: 0}
-  _currentDirection: 0
 --- !u!1 &998495273
 GameObject:
   m_ObjectHideFlags: 0
@@ -6638,7 +6624,7 @@ GameObject:
   m_Layer: 0
   m_Name: eye
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -6689,6 +6675,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1344733878}
+  - {fileID: 1510552745}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6704,50 +6691,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85724d19594859848a3c2a8d1bdb51b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 5
-  _jumpPower: 5
-  _rayDistance: {x: 0, y: -2, z: 0}
+  _cameraSpeed: 3
+  _cameraValue: {x: -75, y: 75}
+  _slerpSpeed: 15
+  _eye: {fileID: 1344733878}
+  _moveSpeed: 3
+  _footPos: {fileID: 1510552745}
+  _rayDistance: {x: 0, y: -0.2, z: 0}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 256
-  _eye: {fileID: 1344733878}
-  _portalTag: Portal
-  _aimH:
-    Value: -0.14
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
-    m_AccelTime: 0.1
-    m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
-    m_InputAxisValue: 0
-    m_InvertInput: 0
-    m_MinValue: 0
-    m_MaxValue: 360
-    m_Wrap: 1
-    m_Recentering:
-      m_enabled: 0
-      m_WaitTime: 1
-      m_RecenteringTime: 2
-      m_LegacyHeadingDefinition: 0
-      m_LegacyVelocityFilterStrength: 0
-  _aimV:
-    Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
-    m_AccelTime: 0.1
-    m_DecelTime: 0.1
-    m_InputAxisName: Mouse Y
-    m_InputAxisValue: 0
-    m_InvertInput: 1
-    m_MinValue: -90
-    m_MaxValue: 90
-    m_Wrap: 0
-    m_Recentering:
-      m_enabled: 0
-      m_WaitTime: 1
-      m_RecenteringTime: 2
-      m_LegacyHeadingDefinition: 0
-      m_LegacyVelocityFilterStrength: 0
 --- !u!136 &1393451792
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6892,6 +6845,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1510552744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510552745}
+  m_Layer: 0
+  m_Name: foot
+  m_TagString: Untagged
+  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1510552745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510552744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.785, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1393451790}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1905125996
 Mesh:

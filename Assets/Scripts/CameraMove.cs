@@ -13,6 +13,13 @@ public class CameraMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        var h = Input.GetAxis("Mouse X");
+        var v = Input.GetAxis("Mouse Y");
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            Debug.Log(h);
+            Debug.Log(v);
+        }
     }
 }
