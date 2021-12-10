@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 154393172}
   - component: {fileID: 154393171}
   - component: {fileID: 154393170}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 170272910}
   - component: {fileID: 170272909}
   - component: {fileID: 170272908}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Portal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _otherPortal: {fileID: 1173161245}
   _outlineRenderer: {fileID: 1638650000}
-  _portalColor: {r: 1, g: 0.532, b: 0, a: 0}
+  _portalColor: {r: 1, g: 0.532, b: 0, a: 1}
   _placementMask:
     serializedVersion: 2
     m_Bits: 768
@@ -563,7 +563,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 823
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5300,7 +5300,7 @@ GameObject:
   - component: {fileID: 337935665}
   - component: {fileID: 337935667}
   - component: {fileID: 337935666}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5419,7 +5419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 412246954}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5582,7 +5582,7 @@ GameObject:
   - component: {fileID: 592998080}
   - component: {fileID: 592998082}
   - component: {fileID: 592998081}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7199,7 +7199,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 1024
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -7224,7 +7224,7 @@ GameObject:
   - component: {fileID: 1173161248}
   - component: {fileID: 1173161247}
   - component: {fileID: 1173161245}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Portal1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7245,7 +7245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _otherPortal: {fileID: 170272908}
   _outlineRenderer: {fileID: 1740849469}
-  _portalColor: {r: 0, g: 0, b: 1, a: 0}
+  _portalColor: {r: 0, g: 0, b: 1, a: 1}
   _placementMask:
     serializedVersion: 2
     m_Bits: 768
@@ -7598,6 +7598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1344733878}
+  - component: {fileID: 1344733879}
   m_Layer: 0
   m_Name: eye
   m_TagString: Untagged
@@ -7620,6 +7621,30 @@ Transform:
   m_Father: {fileID: 1393451790}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1344733879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344733877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a9ec89ae77a9c44be546255678508e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _portals:
+  - {fileID: 1173161245}
+  - {fileID: 170272908}
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  _portalLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _crosshair: {fileID: 454059452}
+  _rayDistance: 250
+  _player: {fileID: 1393451791}
 --- !u!1 &1393451789
 GameObject:
   m_ObjectHideFlags: 0
@@ -7630,7 +7655,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1393451790}
   - component: {fileID: 1393451791}
-  - component: {fileID: 1393451795}
   - component: {fileID: 1393451793}
   - component: {fileID: 1393451792}
   m_Layer: 0
@@ -7672,7 +7696,7 @@ MonoBehaviour:
   _cameraValue: {x: -75, y: 75}
   _slerpSpeed: 15
   _eye: {fileID: 1344733878}
-  _moveSpeed: 3
+  _moveSpeed: 6
   _footPos: {fileID: 1510552745}
   _rayDistance: {x: 0, y: -0.2, z: 0}
   _groundLayer:
@@ -7708,29 +7732,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1393451795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1393451789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5a9ec89ae77a9c44be546255678508e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _portals:
-  - {fileID: 1173161245}
-  - {fileID: 170272908}
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  _portalLayer:
-    serializedVersion: 2
-    m_Bits: 512
-  _crosshair: {fileID: 454059452}
-  _rayDistance: 50
 --- !u!1 &1396095293
 GameObject:
   m_ObjectHideFlags: 0
@@ -7866,7 +7867,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1542627185}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7898,7 +7899,7 @@ GameObject:
   - component: {fileID: 1638650002}
   - component: {fileID: 1638650001}
   - component: {fileID: 1638650000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OutLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7977,7 +7978,7 @@ GameObject:
   - component: {fileID: 1740849467}
   - component: {fileID: 1740849468}
   - component: {fileID: 1740849469}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OutLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

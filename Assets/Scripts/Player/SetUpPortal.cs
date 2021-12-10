@@ -10,10 +10,10 @@ public class SetUpPortal : MonoBehaviour
     [SerializeField] Crosshair _crosshair = default;
     [SerializeField] float _rayDistance = 50f;
     
-    PlayerController _player = default;
+    [SerializeField]PlayerController _player = default;
     private void Awake()
     {
-        _player = GetComponent<PlayerController>();
+        //_player = GetComponent<PlayerController>();
     }
     private void Update()
     {
