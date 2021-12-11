@@ -15,6 +15,11 @@ public class SetUpPortal : MonoBehaviour
     {
         //_player = GetComponent<PlayerController>();
     }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(this.transform.position, this.transform.forward * _rayDistance);
+    }
     private void Update()
     {
         if(Input.GetButtonDown("Fire1"))

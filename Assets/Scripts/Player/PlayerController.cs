@@ -26,6 +26,7 @@ public class PlayerController : PortalableObject
     public Quaternion TargetRotation { get => _targetRotation; set => _targetRotation = value; }
     protected override void Awake()
     {
+        base.Awake();
         _rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         TargetRotation = this.transform.rotation;
