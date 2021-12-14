@@ -41,7 +41,7 @@ public class PlayerController : PortalableObject
     /// <summary>カメラの回転を制御する</summary>
     void CameraMove()
     {
-        var rotation = new Vector2(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
+        var rotation = new Vector2(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"));
         var targetEuler = TargetRotation.eulerAngles + (Vector3)rotation * _cameraSpeed;
 
         if(targetEuler.x > 180.0f)
@@ -75,7 +75,7 @@ public class PlayerController : PortalableObject
                 return;
             }
 
-            _dir = Camera.main.transform.TransformDirection(_dir); //カメラを基準に座標をとる
+            _dir = _eye.transform.TransformDirection(_dir); //カメラを基準に座標をとる
             _dir.y = 0;
 
             Vector3 move = _dir.normalized * _moveSpeed;　//移動
@@ -96,5 +96,11 @@ public class PlayerController : PortalableObject
         {
             isGround = false;
         }
+    }
+    public override void Warp()
+    {
+        base.Warp();
+
+        TargetRotation = Quaternion.LookRotation(_eye.transform.forward, Vector3.up);
     }
 }
