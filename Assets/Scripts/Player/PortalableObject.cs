@@ -39,9 +39,12 @@ public class PortalableObject : MonoBehaviour
         relativePos = _halfTurn * relativePos;
         this.transform.position = outTransform.TransformPoint(relativePos);
 
-        Quaternion relativeRot = Quaternion.Inverse(inTransform.rotation) * this.transform.rotation;
-        relativeRot = _halfTurn * relativeRot;
-        this.transform.rotation = outTransform.rotation * relativeRot;
+        if (outTransform.rotation.x == 0)
+        {
+            Quaternion relativeRot = Quaternion.Inverse(inTransform.rotation) * this.transform.rotation;
+            relativeRot = _halfTurn * relativeRot;
+            this.transform.rotation = outTransform.rotation * relativeRot;
+        }
 
         Vector3 relativeVel = inTransform.InverseTransformDirection(_rb.velocity);
         relativeVel = _halfTurn * relativeVel;

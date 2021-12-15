@@ -70,10 +70,10 @@ public class PlayerController : PortalableObject
         }
         else
         {
-            if (!isGround)
-            {
-                return;
-            }
+            //if (!isGround)
+            //{
+            //    return;
+            //}
 
             _dir = _eye.transform.TransformDirection(_dir); //カメラを基準に座標をとる
             _dir.y = 0;
