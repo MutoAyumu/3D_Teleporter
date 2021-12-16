@@ -1,0 +1,2 @@
+C:\Users\dango\OneDrive\ドキュメント\Unity\3D_Teleporter\obj\Debug\Assembly-CSharp-firstpass.csproj.AssemblyReference.cache
+C:\Users\dango\OneDrive\ドキュメント\Unity\3D_Teleporter\obj\Debug\Assembly-CSharp-firstpass.csproj.CoreCompileInputs.cache
