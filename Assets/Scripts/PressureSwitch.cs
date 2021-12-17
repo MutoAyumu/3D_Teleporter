@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider))]
 public class PressureSwitch : MonoBehaviour
@@ -9,6 +10,8 @@ public class PressureSwitch : MonoBehaviour
     Collider _collider;
     Animator _anim;
     [SerializeField] float _pressLimit = 5;
+    [SerializeField] UnityEvent _pressedEvent = default;
+    [SerializeField] UnityEvent _SeparatedEvent = default;
 
     private void Start()
     {
@@ -29,6 +32,7 @@ public class PressureSwitch : MonoBehaviour
             if(_totalMass >= _pressLimit)
             {
                 _anim.SetBool("Press", true);
+                _pressedEvent.Invoke();
             }
         }
     }
@@ -44,6 +48,7 @@ public class PressureSwitch : MonoBehaviour
             if(_totalMass <= 0)
             {
                 _anim.SetBool("Press", false);
+                _SeparatedEvent.Invoke();
             }
         }
     }
