@@ -34,9 +34,9 @@ public class SetUpPortal : MonoBehaviour
     void FirePortal(int portalID, Vector3 pos, Vector3 dir, float distance)
     {
         RaycastHit hit;
-        Physics.Raycast(pos, dir, out hit, distance, _wallLayer);
+        Physics.Raycast(pos, dir, out hit, distance);
 
-        if(hit.collider != null)
+        if(hit.collider != null && hit.collider.gameObject.layer != _wallLayer)
         {
             if(hit.collider.gameObject.layer == _portalLayer)
             {

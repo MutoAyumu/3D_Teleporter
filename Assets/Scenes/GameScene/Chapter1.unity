@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: b56ae2bac60ff0d4a9d4823e80c9090b,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1946,9 +1946,9 @@ Transform:
   - {fileID: 505058373}
   - {fileID: 1113756954}
   - {fileID: 1016074984}
+  - {fileID: 4771852582950812828}
   - {fileID: 659246372}
   - {fileID: 180769312}
-  - {fileID: 4771852582950812828}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19991,6 +19991,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 812378045}
     m_Modifications:
+    - target: {fileID: 3406596270355661505, guid: 646219f6571cbec4ba94a385894c7786,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3406596270355661505, guid: 646219f6571cbec4ba94a385894c7786,
+        type: 3}
+      propertyPath: far clip plane
+      value: 1500
+      objectReference: {fileID: 0}
     - target: {fileID: 3406596270355661506, guid: 646219f6571cbec4ba94a385894c7786,
         type: 3}
       propertyPath: m_RootOrder

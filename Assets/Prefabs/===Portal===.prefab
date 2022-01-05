@@ -1,23 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &2352614043752658990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857043996600889625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbc490fb3702714cad5d5e72d5d6db3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectLayer:
-    serializedVersion: 2
-    m_Bits: 257
-  _defaultLayerName: Default
-  _gripLayerName: IsGrip
-  _setPos: {fileID: 2352614045330481913}
 --- !u!1 &2352614044706746213
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,6 +65,24 @@ Transform:
   m_Father: {fileID: 6857043996600889626}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2352614043752658990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6857043996600889625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbc490fb3702714cad5d5e72d5d6db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectLayer:
+    serializedVersion: 2
+    m_Bits: 257
+  _defaultLayerName: Default
+  _gripLayerName: IsGrip
+  _setPos: {fileID: 2352614045330481913}
 --- !u!1001 &2352614044124765762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,6 +90,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2352614044706746212}
     m_Modifications:
+    - target: {fileID: 3406596270355661505, guid: 646219f6571cbec4ba94a385894c7786,
+        type: 3}
+      propertyPath: far clip plane
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 3406596270355661506, guid: 646219f6571cbec4ba94a385894c7786,
         type: 3}
       propertyPath: m_RootOrder
