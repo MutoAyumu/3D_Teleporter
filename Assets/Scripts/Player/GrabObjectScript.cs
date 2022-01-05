@@ -9,6 +9,7 @@ public class GrabObjectScript : MonoBehaviour
     Rigidbody _rb;
     Collider _col;
     GameObject _obj;
+    float _halfScale;
 
     [SerializeField] LayerMask _objectLayer = default;
     [SerializeField] string _defaultLayerName = "Default";
@@ -32,7 +33,7 @@ public class GrabObjectScript : MonoBehaviour
             }
             else
             {
-                _obj.transform.position = _hit.point;
+                _obj.transform.position = _hit.point + _hit.normal * _halfScale;
             }
 
             if(Input.GetButtonDown("Jump"))
@@ -57,6 +58,7 @@ public class GrabObjectScript : MonoBehaviour
                     isGrab = true;
                     _obj = _hit.collider.gameObject;
                     _obj.layer = LayerMask.NameToLayer(_gripLayerName);
+                    _halfScale = _obj.transform.localScale.magnitude / 2;
 
                     _rb = _obj.GetComponent<Rigidbody>();
                     _rb.useGravity = false;
