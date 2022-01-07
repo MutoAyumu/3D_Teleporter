@@ -10,6 +10,8 @@ public class PortalCamera : MonoBehaviour
     [SerializeField] PortalScript[] _portals = new PortalScript[2];
     [SerializeField] Camera _portalCam = default;
     [SerializeField] int _iterations = 7;
+    [SerializeField] float _near = 0.3f;
+    [SerializeField] float _far = 1000f;
 
     RenderTexture _tempTexture1 = default;
     RenderTexture _tempTexture2 = default;
@@ -90,6 +92,9 @@ public class PortalCamera : MonoBehaviour
 
         var newMatrix = _mainCam.CalculateObliqueMatrix(clipCameraSpase);
         _portalCam.projectionMatrix = newMatrix;
+
+        _portalCam.nearClipPlane = _near;
+        _portalCam.farClipPlane = _far;
 
         //カメラのrenderTargetにセット
         UniversalRenderPipeline.RenderSingleCamera(SRC, _portalCam);

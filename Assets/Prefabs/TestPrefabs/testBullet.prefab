@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6862405784477904080}
   - component: {fileID: 55071028237904187}
   - component: {fileID: 178983920365788892}
-  m_Layer: 4
+  m_Layer: 12
   m_Name: testBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4fd68c8149f70443a521d676af5ff01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSpeed: 2
+  _bulletSpeed: 4
   _portalLayer:
     serializedVersion: 2
     m_Bits: 768

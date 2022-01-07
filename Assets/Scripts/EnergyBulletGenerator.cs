@@ -28,7 +28,8 @@ public class EnergyBulletGenerator : MonoBehaviour
     {
         if(_energyBullet)
         {
-            Instantiate(_energyBullet, _generatePoint.position, Quaternion.identity, this.transform);
+            var obj = Instantiate(_energyBullet, _generatePoint.position, Quaternion.identity, this.transform);
+            obj.transform.rotation = this.transform.rotation;
         }
     }
 }
