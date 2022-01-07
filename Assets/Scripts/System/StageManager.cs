@@ -8,15 +8,15 @@ using UnityEngine.UI;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] GameObject[] _selectButton;
-    public int _stageNum = 1;//GameManagerを作ったら消す
+    public static int _stageNum = 1;
     [SerializeField] Image _panel = default;
     [SerializeField] float _changeDuration = 3f;
 
     private void Awake()
     {
-        //GameManagerから情報を受け取る
         _panel.color = new Color(0, 0, 0, 0);
         _panel.raycastTarget = false;
+        Cursor.lockState = CursorLockMode.None;
     }
     private void Start()
     {

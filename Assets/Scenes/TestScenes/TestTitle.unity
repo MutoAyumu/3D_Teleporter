@@ -731,7 +731,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: test
+          m_StringArgument: Chapter2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &195700421
@@ -861,7 +861,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: test
+          m_StringArgument: Chapter3
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &359561697
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2359,7 +2359,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: test
+          m_StringArgument: Chapter4
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1883047369
@@ -2525,7 +2525,6 @@ MonoBehaviour:
   - {fileID: 195700418}
   - {fileID: 359561694}
   - {fileID: 1883047366}
-  _stageNum: 2
   _panel: {fileID: 1440791125}
   _changeDuration: 1
 --- !u!4 &2031485229
