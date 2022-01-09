@@ -7,7 +7,7 @@ public class PressTheButtonScript : MonoBehaviour
 {
     [SerializeField] Text _popUpText = default;
     [SerializeField] Transform _setPos = default;
-    [SerializeField] string _settingButtonName = "Jump";
+    [SerializeField] string _settingButtonName = "E";
     [SerializeField] float _rayDistance = 1.5f;
     [SerializeField] LayerMask _hitLayer = default;
 

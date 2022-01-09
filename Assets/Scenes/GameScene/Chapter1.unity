@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: b56ae2bac60ff0d4a9d4823e80c9090b,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1867,36 +1867,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &230189599
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 230189600}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &230189600
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 230189599}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1866739957}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &238199046 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 3406596270355661505, guid: 646219f6571cbec4ba94a385894c7786,
@@ -16904,11 +16874,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9191626031579736773, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9191626031579736773, guid: 23a30c27d32a07741acb573a0affcf52,
-        type: 3}
       propertyPath: _portalCam
       value: 
       objectReference: {fileID: 238199046}
@@ -16922,25 +16887,10 @@ PrefabInstance:
       propertyPath: _portals.Array.data[1]
       value: 
       objectReference: {fileID: 1064657218}
-    - target: {fileID: 9191626031579736777, guid: 23a30c27d32a07741acb573a0affcf52,
-        type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 2871
-      objectReference: {fileID: 0}
     - target: {fileID: 9191626032807756160, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
       propertyPath: m_Name
       value: GameObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 9191626032807756162, guid: 23a30c27d32a07741acb573a0affcf52,
-        type: 3}
-      propertyPath: _cameraValue.x
-      value: -75
-      objectReference: {fileID: 0}
-    - target: {fileID: 9191626032807756162, guid: 23a30c27d32a07741acb573a0affcf52,
-        type: 3}
-      propertyPath: _cameraValue.y
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 9191626032807756163, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
@@ -16996,11 +16946,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9191626032821837882, guid: 23a30c27d32a07741acb573a0affcf52,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9191626032821837882, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
@@ -24333,36 +24278,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1866739956 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9191626032821837880, guid: 23a30c27d32a07741acb573a0affcf52,
-    type: 3}
-  m_PrefabInstance: {fileID: 1144396280}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1866739957 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9191626032821837883, guid: 23a30c27d32a07741acb573a0affcf52,
-    type: 3}
-  m_PrefabInstance: {fileID: 1144396280}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1866739959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1866739956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cbc490fb3702714cad5d5e72d5d6db3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectLayer:
-    serializedVersion: 2
-    m_Bits: 257
-  _defaultLayerName: Default
-  _gripLayerName: IsGrip
-  _setPos: {fileID: 230189600}
 --- !u!43 &1867868046
 Mesh:
   m_ObjectHideFlags: 0

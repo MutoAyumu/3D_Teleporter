@@ -15,6 +15,7 @@ public class GrabObjectScript : MonoBehaviour
     [SerializeField] string _defaultLayerName = "Default";
     [SerializeField] string _gripLayerName = "IsGrip";
     [SerializeField] Transform _setPos = default;
+    [SerializeField] string _settingButtonName = "E";
 
     private void Update()
     {
@@ -36,7 +37,7 @@ public class GrabObjectScript : MonoBehaviour
                 _obj.transform.position = _hit.point + _hit.normal * _halfScale;
             }
 
-            if(Input.GetButtonDown("Jump"))
+            if(Input.GetButtonDown(_settingButtonName))
             {
                 isGrab = false;
                 _obj.layer = LayerMask.NameToLayer(_defaultLayerName);
@@ -49,7 +50,7 @@ public class GrabObjectScript : MonoBehaviour
         }
         else//放しているとき
         {
-            if(Input.GetButtonDown("Jump") && ray)
+            if(Input.GetButtonDown(_settingButtonName) && ray)
             {
                 var collider = _hit.collider.gameObject.GetComponent<PortalableObject>();
 

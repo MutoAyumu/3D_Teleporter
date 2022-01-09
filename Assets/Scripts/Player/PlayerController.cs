@@ -13,6 +13,8 @@ public class PlayerController : PortalableObject
     [SerializeField] Transform _eye = default;
     [Space(10), Header("PlayerMove")]
     [SerializeField] float _moveSpeed = 3f;
+    [SerializeField] float _jumpPower = 15f;
+    [SerializeField] string _settingButtonName = "Jump";
     [Space(10), Header("IsGround")]
     [SerializeField] Transform _footPos = default;
     [SerializeField] Vector3 _rayDistance = Vector3.zero;
@@ -36,6 +38,7 @@ public class PlayerController : PortalableObject
         CameraMove();
         InputMove();
         UpdateMove();
+        InputJump();
         IsGround();
     }
     /// <summary>カメラの回転を制御する</summary>
@@ -81,6 +84,16 @@ public class PlayerController : PortalableObject
             Vector3 move = _dir.normalized * _moveSpeed;　//移動
             move.y = _rb.velocity.y;
             _rb.velocity = move;
+        }
+    }
+    void InputJump()
+    {
+        if(isGround)
+        {
+            if(Input.GetButtonDown(_settingButtonName))
+            {
+                _rb.AddForce(this.transform.up * _jumpPower, ForceMode.Impulse);
+            }
         }
     }
     /// <summary>接地判定</summary>
