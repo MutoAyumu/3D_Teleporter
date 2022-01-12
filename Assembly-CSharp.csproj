@@ -53,6 +53,7 @@
     <UnityVersion>2019.4.24f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetStoreTools\UI pack\Scripts\FillValueNumber.cs" />
     <Compile Include="Assets\Scripts\EnergyBulletGenerator.cs" />
     <Compile Include="Assets\Scripts\EnergyBulletReceptor.cs" />
     <Compile Include="Assets\Scripts\EnergyBulletScript.cs" />
@@ -74,6 +75,7 @@
   <ItemGroup>
     <None Include="Assets\Shaders\PortalMask.shader" />
     <None Include="Assets\Shaders\Outline.shader" />
+    <None Include="Assets\AssetStoreTools\UI pack\Documentation.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

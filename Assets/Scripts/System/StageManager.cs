@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] GameObject[] _selectButton;
-    public static int _stageNum = 1;
+    public static int _stageNum = 4;
     [SerializeField] Image _panel = default;
     [SerializeField] float _changeDuration = 3f;
 
@@ -30,5 +30,11 @@ public class StageManager : MonoBehaviour
         //ここにDoTweenでいい感じになるようにお願いします
         _panel.raycastTarget = true;
         DOVirtual.Color(_panel.color, new Color(0,0,0,1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(name));
+    }
+    public void StageChange()
+    {
+        //ここにDoTweenでいい感じになるようにお願いします
+        _panel.raycastTarget = true;
+        DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(_stageNum));
     }
 }

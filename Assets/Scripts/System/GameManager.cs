@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float _changeDuration = 3f;
     [SerializeField] string _nextSceneName = " ";
     [SerializeField] Image _optionImage = default;
-    [SerializeField] string _optionName = "";
+    [SerializeField] string _optionName = "Cancel";
 
     private void Awake()
     {
@@ -22,13 +22,16 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        Option();
+        if (Input.GetButtonDown(_optionName))
+        {
+            Option();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
         var player = other.gameObject.GetComponent<PlayerController>();
 
-        if(player)
+        if (player)
         {
             StageManager._stageNum = Mathf.Max(StageManager._stageNum, _nextChapterNumber);
             StageChange(_nextSceneName);
@@ -41,18 +44,15 @@ public class GameManager : MonoBehaviour
     }
     public void Option()
     {
-        if(Input.GetButtonDown(_optionName))
+        if (_optionImage.gameObject.activeSelf)//オプションパネルがアクティブだったらパネルを消してカーソルをロックする
         {
-            if (_optionImage.gameObject.activeSelf)//オプションパネルがアクティブだったらパネルを消してカーソルをロックする
-            {
-                _optionImage.gameObject.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-            }
-            else
-            {
-                _optionImage.gameObject.SetActive(true);
-                Cursor.lockState = CursorLockMode.None;
-            }
+            _optionImage.gameObject.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            _optionImage.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }
