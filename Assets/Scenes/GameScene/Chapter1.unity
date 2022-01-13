@@ -1867,6 +1867,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &220110789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149417505822, guid: 23a30c27d32a07741acb573a0affcf52,
+    type: 3}
+  m_PrefabInstance: {fileID: 1144396280}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &238199046 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 3406596270355661505, guid: 646219f6571cbec4ba94a385894c7786,
@@ -16901,6 +16907,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191626032807756162, guid: 23a30c27d32a07741acb573a0affcf52,
+        type: 3}
+      propertyPath: _body
+      value: 
+      objectReference: {fileID: 220110789}
+    - target: {fileID: 9191626032807756162, guid: 23a30c27d32a07741acb573a0affcf52,
+        type: 3}
+      propertyPath: _jumpPower
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191626032807756162, guid: 23a30c27d32a07741acb573a0affcf52,
+        type: 3}
+      propertyPath: _moveSpeed
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 9191626032807756163, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}

@@ -11,7 +11,7 @@ public class PlayerController : PortalableObject
     [SerializeField, Tooltip("XがMin　YがMax")] Vector2 _cameraValue = Vector2.zero;
     [SerializeField] float _slerpSpeed = 15f;
     [SerializeField] Transform _eye = default;
-    [SerializeField] Transform _body = default;
+    [SerializeField] GameObject _body = default;
     [Space(10), Header("PlayerMove")]
     [SerializeField] float _moveSpeed = 3f;
     [SerializeField] float _jumpPower = 15f;
@@ -25,6 +25,7 @@ public class PlayerController : PortalableObject
     Vector3 _dir;
     bool isGround;
     bool isPause;
+    Animator _anim;
 
     public Quaternion TargetRotation { get => _targetRotation; set => _targetRotation = value; }
     protected override void Awake()
@@ -32,6 +33,7 @@ public class PlayerController : PortalableObject
         base.Awake();
         Cursor.lockState = CursorLockMode.Locked;
         TargetRotation = this.transform.rotation;
+        _anim = _body.GetComponent<Animator>();
     }
 
     private void Update()
@@ -61,9 +63,9 @@ public class PlayerController : PortalableObject
 
         _eye.rotation = Quaternion.Slerp(_eye.rotation, TargetRotation, Time.deltaTime * _slerpSpeed);
         var dir = _eye.rotation;
-        dir.x = _body.rotation.x;
-        dir.z = _body.rotation.z;
-        _body.rotation = dir;
+        dir.x = _body.transform.rotation.x;
+        dir.z = _body.transform.rotation.z;
+        _body.transform.rotation = dir;
     }
     void InputMove()
     {
@@ -78,6 +80,11 @@ public class PlayerController : PortalableObject
         if (_dir == Vector3.zero)//止まっているとき
         {
             _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
+
+            if(isGround)
+            {
+                _anim.SetBool("Walk", false);
+            }
         }
         else
         {
@@ -87,6 +94,11 @@ public class PlayerController : PortalableObject
             Vector3 move = _dir.normalized * _moveSpeed;　//移動
             move.y = _rb.velocity.y;
             _rb.velocity = move;
+            
+            if(isGround)
+            {
+                _anim.SetBool("Walk", true);
+            }
         }
     }
     void InputJump()
@@ -107,10 +119,12 @@ public class PlayerController : PortalableObject
         if (Physics.Linecast(_footPos.position, _footPos.position + _rayDistance, _groundLayer))
         {
             isGround = true;
+            _anim.SetBool("IsGround", true);
         }
         else
         {
             isGround = false;
+            _anim.SetBool("IsGround", false);
         }
     }
     public override void Warp()
