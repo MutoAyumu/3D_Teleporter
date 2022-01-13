@@ -11,6 +11,7 @@ public class PlayerController : PortalableObject
     [SerializeField, Tooltip("XがMin　YがMax")] Vector2 _cameraValue = Vector2.zero;
     [SerializeField] float _slerpSpeed = 15f;
     [SerializeField] Transform _eye = default;
+    [SerializeField] Transform _body = default;
     [Space(10), Header("PlayerMove")]
     [SerializeField] float _moveSpeed = 3f;
     [SerializeField] float _jumpPower = 15f;
@@ -59,6 +60,10 @@ public class PlayerController : PortalableObject
         TargetRotation = Quaternion.Euler(targetEuler);//回転用のQuaternionを作成
 
         _eye.rotation = Quaternion.Slerp(_eye.rotation, TargetRotation, Time.deltaTime * _slerpSpeed);
+        var dir = _eye.rotation;
+        dir.x = _body.rotation.x;
+        dir.z = _body.rotation.z;
+        _body.rotation = dir;
     }
     void InputMove()
     {
