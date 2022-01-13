@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] string _nextSceneName = " ";
     [SerializeField] Image _optionImage = default;
     [SerializeField] string _optionName = "Cancel";
+
+    bool isPause = false;
+    event Action<bool> _onPauseResume = default;
+
+    public Action<bool> OnPauseResume
+    {
+        get { return _onPauseResume; }
+        set { _onPauseResume = value; }
+    }
+
+    public bool IsPause { get => isPause; set => isPause = value; }
 
     private void Awake()
     {
@@ -46,13 +58,20 @@ public class GameManager : MonoBehaviour
     {
         if (_optionImage.gameObject.activeSelf)//オプションパネルがアクティブだったらパネルを消してカーソルをロックする
         {
+            PauseResume();
             _optionImage.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
         }
         else
         {
+            PauseResume();
             _optionImage.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
         }
+    }
+    void PauseResume()
+    {
+        isPause = !isPause;
+        _onPauseResume(isPause);
     }
 }

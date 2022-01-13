@@ -22,24 +22,27 @@ public class PlayerController : PortalableObject
 
     Quaternion _targetRotation;
     Vector3 _dir;
-    Rigidbody _rb;
     bool isGround;
+    bool isPause;
 
     public Quaternion TargetRotation { get => _targetRotation; set => _targetRotation = value; }
     protected override void Awake()
     {
         base.Awake();
-        _rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
         TargetRotation = this.transform.rotation;
     }
+
     private void Update()
     {
-        CameraMove();
-        InputMove();
-        UpdateMove();
-        InputJump();
-        IsGround();
+        if (!isPause)
+        {
+            CameraMove();
+            InputMove();
+            UpdateMove();
+            InputJump();
+            IsGround();
+        }
     }
     /// <summary>カメラの回転を制御する</summary>
     void CameraMove()
@@ -73,11 +76,6 @@ public class PlayerController : PortalableObject
         }
         else
         {
-            //if (!isGround)
-            //{
-            //    return;
-            //}
-
             _dir = _eye.transform.TransformDirection(_dir); //カメラを基準に座標をとる
             _dir.y = 0;
 
@@ -115,5 +113,17 @@ public class PlayerController : PortalableObject
         base.Warp();
 
         TargetRotation = Quaternion.LookRotation(_eye.transform.forward, Vector3.up);
+    }
+    protected override void Pause()
+    {
+        isPause = true;
+        base.Pause();
+        _rb.isKinematic = true;
+    }
+    protected override void Resume()
+    {
+        _rb.isKinematic = false;
+        base.Resume();
+        isPause = false;
     }
 }

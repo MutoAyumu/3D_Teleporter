@@ -10,10 +10,33 @@ public class MovingFloor : MonoBehaviour
 
     Vector3 _move;
     int _count;
+    GameManager _gmanager;
+    bool isPause;
+    private void Awake()
+    {
+        _gmanager = GameObject.FindObjectOfType<GameManager>();
+    }
 
+    private void OnEnable()
+    {
+        if(_gmanager)
+        {
+            _gmanager.OnPauseResume += PauseResume;
+        }
+    }
+    private void OnDisable()
+    {
+        if(_gmanager)
+        {
+            _gmanager.OnPauseResume -= PauseResume;
+        }
+    }
     private void Update()
     {
-        Patrol();
+        if (!isPause)
+        {
+            Patrol();
+        }
     }
     void Patrol()
     {
@@ -50,5 +73,24 @@ public class MovingFloor : MonoBehaviour
         {
             collision.gameObject.transform.parent = null;
         }
+    }
+    void PauseResume(bool isPause)
+    {
+        if (isPause)
+        {
+            Pause();
+        }
+        else
+        {
+            Resume();
+        }
+    }
+    public void Pause()
+    {
+        isPause = true;
+    }
+    public void Resume()
+    {
+        isPause = false;
     }
 }
