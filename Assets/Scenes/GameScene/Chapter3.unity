@@ -7520,7 +7520,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-8156
+  m_Name: pb_Mesh-108506
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19715,6 +19715,16 @@ PrefabInstance:
     - target: {fileID: 6885617832590214394, guid: ec35d9f5b09203f40b7cebfbaa431370,
         type: 3}
       propertyPath: _panel
+      value: 
+      objectReference: {fileID: 939181470}
+    - target: {fileID: 6885617832590214394, guid: ec35d9f5b09203f40b7cebfbaa431370,
+        type: 3}
+      propertyPath: _optionName
+      value: Cancel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6885617832590214394, guid: ec35d9f5b09203f40b7cebfbaa431370,
+        type: 3}
+      propertyPath: _optionImage
       value: 
       objectReference: {fileID: 939181470}
     - target: {fileID: 6885617832590214394, guid: ec35d9f5b09203f40b7cebfbaa431370,

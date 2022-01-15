@@ -22,14 +22,14 @@ public class PortalableObject : MonoBehaviour
     }
     private void OnEnable()
     {
-        if(_gmanager)
+        if (_gmanager)
         {
             _gmanager.OnPauseResume += PauseResume;
         }
     }
     private void OnDisable()
     {
-        if(_gmanager)
+        if (_gmanager)
         {
             _gmanager.OnPauseResume -= PauseResume;
         }
@@ -71,7 +71,7 @@ public class PortalableObject : MonoBehaviour
     public void ExitPortal(Collider wallCollider)
     {
         Physics.IgnoreCollision(_collider, wallCollider, false);
-        -- _inPortalCount;
+        --_inPortalCount;
     }
     public virtual void Warp()
     {
@@ -82,16 +82,20 @@ public class PortalableObject : MonoBehaviour
         relativePos = _halfTurn * relativePos;
         this.transform.position = outTransform.TransformPoint(relativePos);
 
-        if (outTransform.rotation.x == 0)
-        {
-            Quaternion relativeRot = Quaternion.Inverse(inTransform.rotation) * this.transform.rotation;
-            relativeRot = _halfTurn * relativeRot;
-            this.transform.rotation = outTransform.rotation * relativeRot;
-        }
+        var inRot = inTransform.rotation;
+        inRot.x = 0;
+        inRot.z = 0;
+        var outRot = outTransform.rotation;
+        outRot.x = 0;
+        outRot.z = 0;
+        Quaternion relativeRot = Quaternion.Inverse(inRot) * this.transform.rotation;
+        relativeRot = _halfTurn * relativeRot;
+        this.transform.rotation = outRot * relativeRot;
 
+        var warpPower = 1.05f;
         Vector3 relativeVel = inTransform.InverseTransformDirection(_rb.velocity);
         relativeVel = _halfTurn * relativeVel;
-        _rb.velocity = outTransform.TransformDirection(relativeVel);
+        _rb.velocity = outTransform.TransformDirection(relativeVel) * warpPower;
 
         var tmp = _inPortal;
         _inPortal = _outPortal;

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 230189600}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: look
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -42,7 +42,7 @@ GameObject:
   m_Layer: 0
   m_Name: HandPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -59,36 +59,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1427162206}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &993472754
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 993472755}
-  m_Layer: 0
-  m_Name: LookAtPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &993472755
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 993472754}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.22, y: 0.25, z: 1.512}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1427162206}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1427593342
 GameObject:
@@ -116,16 +86,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1427593342}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.241, y: -0.382, z: 0.409}
+  m_LocalRotation: {x: 0.000000021926098, y: -0.114037015, z: -0.0000000024883775,
+    w: 0.9934765}
+  m_LocalPosition: {x: 0.279, y: -0.424, z: 0.384}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 1454231915}
   - {fileID: 590165458}
-  - {fileID: 993472755}
   m_Father: {fileID: 9191626031579736776}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -13.096001, z: 0}
 --- !u!33 &1428456574
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -204,7 +174,7 @@ GameObject:
   m_Layer: 0
   m_Name: HandPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -522,7 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b00e10d08665b64685fa516a89be95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 993472755}
+  _target: {fileID: 230189600}
   _weight: 0.5
   _bodyWeight: 0.2
   _headWeight: 1
@@ -2963,9 +2933,9 @@ MonoBehaviour:
   _cameraValue: {x: -75, y: 50}
   _slerpSpeed: 15
   _eye: {fileID: 9191626032821837883}
-  _body: {fileID: 543450653337038500}
-  _moveSpeed: 6
-  _jumpPower: 60
+  _body: {fileID: 919132149417505822}
+  _moveSpeed: 4
+  _jumpPower: 30
   _settingButtonName: Jump
   _footPos: {fileID: 9191626032924988964}
   _rayDistance: {x: 0, y: -0.3, z: 0}
