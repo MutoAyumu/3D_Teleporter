@@ -34877,6 +34877,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ===Portal===
       objectReference: {fileID: 0}
+    - target: {fileID: 2352614044706746213, guid: ad3cb0f363b1ea2468304113fae92a12,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6857043995625913320, guid: ad3cb0f363b1ea2468304113fae92a12,
         type: 3}
       propertyPath: m_CullingMask.m_Bits

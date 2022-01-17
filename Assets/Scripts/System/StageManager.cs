@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] GameObject[] _selectButton;
-    public static int _stageNum = 4;
+    public static int _stageNum = 1;
     [SerializeField] Image _panel = default;
     [SerializeField] float _changeDuration = 3f;
 
