@@ -9,6 +9,7 @@ public class SetUpPortal : MonoBehaviour
     [SerializeField] LayerMask _portalLayer = default;
     [SerializeField] Crosshair _crosshair = default;
     [SerializeField] float _rayDistance = 50f;
+    [SerializeField] Animator _gunModel = default;
     
     [SerializeField]PlayerController _player = default;
     private void Awake()
@@ -25,10 +26,12 @@ public class SetUpPortal : MonoBehaviour
         if(Input.GetButtonDown("Fire1"))
         {
             FirePortal(0, this.transform.position, this.transform.forward, _rayDistance);
+            _gunModel.SetTrigger("Shoot");
         }
         else if(Input.GetButtonDown("Fire2"))
         {
             FirePortal(1, this.transform.position, this.transform.forward, _rayDistance);
+            _gunModel.SetTrigger("Shoot");
         }
     }
     void FirePortal(int portalID, Vector3 pos, Vector3 dir, float distance)

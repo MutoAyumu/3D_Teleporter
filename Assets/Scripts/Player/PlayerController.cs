@@ -12,6 +12,7 @@ public class PlayerController : PortalableObject
     [SerializeField] float _slerpSpeed = 15f;
     [SerializeField] Transform _eye = default;
     [SerializeField] GameObject _body = default;
+    [SerializeField] Animator _gunModel = default;
     [Space(10), Header("PlayerMove")]
     [SerializeField] float _moveSpeed = 3f;
     [SerializeField] float _jumpPower = 15f;
@@ -80,6 +81,7 @@ public class PlayerController : PortalableObject
         if (_dir == Vector3.zero)//止まっているとき
         {
             _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
+            _gunModel.SetBool("Walk", false);
 
             if(isGround)
             {
@@ -98,6 +100,7 @@ public class PlayerController : PortalableObject
             if(isGround)
             {
                 _anim.SetBool("Walk", true);
+                _gunModel.SetBool("Walk", true);
             }
         }
     }
