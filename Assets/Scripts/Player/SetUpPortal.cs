@@ -10,11 +10,15 @@ public class SetUpPortal : MonoBehaviour
     [SerializeField] Crosshair _crosshair = default;
     [SerializeField] float _rayDistance = 50f;
     [SerializeField] Animator _gunModel = default;
+    float _animSpeed;
     
     [SerializeField]PlayerController _player = default;
+    GameManager _gmanager;
+    bool isPause;
     private void Awake()
     {
-        //_player = GetComponent<PlayerController>();
+        _gmanager = GameObject.FindObjectOfType<GameManager>();
+        _animSpeed = _gunModel.speed;
     }
     private void OnDrawGizmos()
     {
@@ -23,6 +27,11 @@ public class SetUpPortal : MonoBehaviour
     }
     private void Update()
     {
+        if(isPause)
+        {
+            return;
+        }
+
         if(Input.GetButtonDown("Fire1"))
         {
             FirePortal(0, this.transform.position, this.transform.forward, _rayDistance);
@@ -71,5 +80,40 @@ public class SetUpPortal : MonoBehaviour
                 _crosshair.SetPortal(portalID, true);//クロスヘアのImageを変更する
             }
         }
+    }
+    private void OnEnable()
+    {
+        if (_gmanager)
+        {
+            _gmanager.OnPauseResume += PauseResume;
+        }
+    }
+    private void OnDisable()
+    {
+        if (_gmanager)
+        {
+            _gmanager.OnPauseResume -= PauseResume;
+        }
+    }
+    void PauseResume(bool isPause)
+    {
+        if (isPause)
+        {
+            Pause();
+        }
+        else
+        {
+            Resume();
+        }
+    }
+    protected virtual void Pause()
+    {
+        isPause = true;
+        _gunModel.speed = 0;
+    }
+    protected virtual void Resume()
+    {
+        isPause = false;
+        _gunModel.speed = _animSpeed;
     }
 }

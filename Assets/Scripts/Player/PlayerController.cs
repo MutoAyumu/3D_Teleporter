@@ -27,6 +27,7 @@ public class PlayerController : PortalableObject
     bool isGround;
     bool isPause;
     Animator _anim;
+    float _animSpeed;
 
     public Quaternion TargetRotation { get => _targetRotation; set => _targetRotation = value; }
     protected override void Awake()
@@ -35,6 +36,7 @@ public class PlayerController : PortalableObject
         Cursor.lockState = CursorLockMode.Locked;
         TargetRotation = this.transform.rotation;
         _anim = _body.GetComponent<Animator>();
+        _animSpeed = _anim.speed;
     }
 
     private void Update()
@@ -141,11 +143,13 @@ public class PlayerController : PortalableObject
         isPause = true;
         base.Pause();
         _rb.isKinematic = true;
+        _anim.speed = 0;
     }
     protected override void Resume()
     {
         _rb.isKinematic = false;
         base.Resume();
         isPause = false;
+        _anim.speed = _animSpeed;
     }
 }

@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     bool isPause = false;
     event Action<bool> _onPauseResume = default;
 
+    Tweener _tweener;
+
+    bool isGameSet;
     public Action<bool> OnPauseResume
     {
         get { return _onPauseResume; }
@@ -43,8 +46,9 @@ public class GameManager : MonoBehaviour
     {
         var player = other.gameObject.GetComponent<PlayerController>();
 
-        if (player)
+        if (player && !isGameSet)
         {
+            isGameSet = true;
             StageManager._stageNum = Mathf.Max(StageManager._stageNum, _nextChapterNumber);
             StageChange(_nextSceneName);
         }
@@ -52,7 +56,7 @@ public class GameManager : MonoBehaviour
     public void StageChange(string name)
     {
         _panel.raycastTarget = true;
-        DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(name));
+        _tweener = DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(name));
     }
     public void Option()
     {
@@ -61,12 +65,14 @@ public class GameManager : MonoBehaviour
             PauseResume();
             _optionImage.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
+            _tweener.Play();
         }
         else
         {
             PauseResume();
             _optionImage.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
+            _tweener.Pause();
         }
     }
     void PauseResume()
