@@ -9,6 +9,7 @@ public class PortalScript : MonoBehaviour
     [SerializeField] Color _portalColor = default;
     [SerializeField] LayerMask _placementMask = default;
     [SerializeField] Transform _testTransform = default;
+    [SerializeField] float _delay = 0.01f;
 
     bool isPlaced;
     Collider _wallCollider = default;
@@ -69,7 +70,7 @@ public class PortalScript : MonoBehaviour
     {
         _testTransform.position = pos;
         _testTransform.rotation = rot;
-        _testTransform.position -= _testTransform.forward * 0.001f;
+        _testTransform.position -= _testTransform.forward * _delay;
 
         FixOverhangs();
         FixIntersects();
