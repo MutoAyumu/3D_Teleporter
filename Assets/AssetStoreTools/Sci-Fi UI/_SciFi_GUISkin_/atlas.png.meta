@@ -180,10 +180,10 @@ TextureImporter:
       name: window
       rect:
         serializedVersion: 2
-        x: 50
-        y: 3090
-        width: 974
-        height: 956
+        x: 54
+        y: 3089
+        width: 961
+        height: 954
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 114, y: 117, z: 110, w: 110}
@@ -851,7 +851,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: bf6dcfd94e4286f4d9b898652f5df506
     internalID: 0
     vertices: []
     indices: 
