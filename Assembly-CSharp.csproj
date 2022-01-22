@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scripts\PressedButtonScript.cs" />
     <Compile Include="Assets\Scripts\PressureSwitch.cs" />
     <Compile Include="Assets\Scripts\System\GameManager.cs" />
+    <Compile Include="Assets\Scripts\System\NewSceneCreator.cs" />
     <Compile Include="Assets\Scripts\System\StageManager.cs" />
   </ItemGroup>
   <ItemGroup>
