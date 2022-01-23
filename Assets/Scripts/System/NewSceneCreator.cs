@@ -76,7 +76,6 @@ public class NewSceneCreator : EditorWindow
             AssetDatabase.CopyAsset(AssetDatabase.GUIDToAssetPath(result[0]), newScenePath);
             AssetDatabase.Refresh();
             Scene newScene = EditorSceneManager.OpenScene(newScenePath, OpenSceneMode.Single);
-            AddSceneToBuildSettings(newScene);
             Close();
         }
         else
@@ -86,19 +85,6 @@ public class NewSceneCreator : EditorWindow
                 "The scene _TemplateScene was not found in Gamekit2D/Scenes folder. This scene is required by the New Scene Creator.",
                 "OK");
         }
-    }
-
-    protected void AddSceneToBuildSettings(Scene scene)
-    {
-        EditorBuildSettingsScene[] buildScenes = EditorBuildSettings.scenes;
-
-        EditorBuildSettingsScene[] newBuildScenes = new EditorBuildSettingsScene[buildScenes.Length + 1];
-        for (int i = 0; i < buildScenes.Length; i++)
-        {
-            newBuildScenes[i] = buildScenes[i];
-        }
-        newBuildScenes[buildScenes.Length] = new EditorBuildSettingsScene(scene.path, true);
-        EditorBuildSettings.scenes = newBuildScenes;
     }
 
     protected GameObject InstantiatePrefab(string folderPath, string prefabName)
