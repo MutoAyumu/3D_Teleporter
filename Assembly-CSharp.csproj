@@ -68,8 +68,8 @@
     <Compile Include="Assets\Scripts\Player\Portal.cs" />
     <Compile Include="Assets\Scripts\Player\PortalScript.cs" />
     <Compile Include="Assets\Scripts\Player\PortalableObject.cs" />
+    <Compile Include="Assets\Scripts\Player\PressTheButtonScript.cs" />
     <Compile Include="Assets\Scripts\Player\SetUpPortal.cs" />
-    <Compile Include="Assets\Scripts\PressTheButtonScript.cs" />
     <Compile Include="Assets\Scripts\PressedButtonScript.cs" />
     <Compile Include="Assets\Scripts\PressureSwitch.cs" />
     <Compile Include="Assets\Scripts\System\GameManager.cs" />

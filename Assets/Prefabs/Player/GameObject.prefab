@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 1428456574}
   - component: {fileID: 1429587646}
   - component: {fileID: 1434856382}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Pistol30
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2611,7 +2611,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9191626031579736776}
-  - component: {fileID: 9191626031579736773}
   - component: {fileID: 9191626031579736777}
   - component: {fileID: 9191626031579736782}
   - component: {fileID: 9191626031579736778}
@@ -2637,25 +2636,6 @@ Transform:
   m_Father: {fileID: 9191626032821837883}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9191626031579736773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9191626031579736783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36cd599d92e930b42a089381c577f268, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _portals:
-  - {fileID: 0}
-  - {fileID: 0}
-  _portalCam: {fileID: 0}
-  _iterations: 7
-  _near: 0.3
-  _far: 1000
 --- !u!20 &9191626031579736777
 Camera:
   m_ObjectHideFlags: 0
@@ -2679,7 +2659,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2687,12 +2667,12 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7991
+    m_Bits: 6967
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -2793,7 +2773,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -2806,7 +2786,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -2947,6 +2927,7 @@ GameObject:
   - component: {fileID: 9191626032821837883}
   - component: {fileID: 9191626032821837882}
   - component: {fileID: 1866739959}
+  - component: {fileID: 6023635038771561844}
   m_Layer: 0
   m_Name: eye
   m_TagString: Untagged
@@ -3010,11 +2991,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectLayer:
     serializedVersion: 2
+    m_Bits: 2048
+  _wallLayer:
+    serializedVersion: 2
     m_Bits: 257
-  _defaultLayerName: Default
-  _gripLayerName: IsGrip
   _setPos: {fileID: 230189600}
   _settingButtonName: E
+  _popUpText: {fileID: 0}
+--- !u!114 &6023635038771561844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191626032821837880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e11470b03a6c94f806c6b5aac077e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _popUpText: {fileID: 0}
+  _setPos: {fileID: 230189600}
+  _settingButtonName: E
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!1 &9191626032924988965
 GameObject:
   m_ObjectHideFlags: 0

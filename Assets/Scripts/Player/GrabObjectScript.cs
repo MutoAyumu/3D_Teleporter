@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GrabObjectScript : MonoBehaviour
 {
@@ -12,10 +13,10 @@ public class GrabObjectScript : MonoBehaviour
     float _halfScale;
 
     [SerializeField] LayerMask _objectLayer = default;
-    [SerializeField] string _defaultLayerName = "Default";
-    [SerializeField] string _gripLayerName = "IsGrip";
+    [SerializeField] LayerMask _wallLayer = default;
     [SerializeField] Transform _setPos = default;
     [SerializeField] string _settingButtonName = "E";
+    [SerializeField] Text _popUpText = default;
 
     private void Update()
     {
@@ -23,24 +24,26 @@ public class GrabObjectScript : MonoBehaviour
     }
     void GrabObject()
     {
-        var ray = Physics.Linecast(this.transform.position, _setPos.position, out _hit, _objectLayer);
+        var ray = Physics.Linecast(this.transform.position, _setPos.position, out _hit, _objectLayer);//オブジェクトを持つためのレイ
         Debug.DrawLine(this.transform.position, _setPos.position, Color.green);
 
         if(isGrab)//掴んでいるとき
         {
-            if (!ray)
+            RaycastHit hit;
+            var wallHit = Physics.Linecast(this.transform.position, _setPos.position, out hit, _wallLayer);
+
+            if (!wallHit)
             {
-                _obj.transform.position = _setPos.position;
+                _obj.transform.position = _setPos.position;//対象の座標をsetPosにする
             }
             else
             {
-                _obj.transform.position = _hit.point + _hit.normal * _halfScale;
+                _obj.transform.position = hit.point + hit.normal * _halfScale;
             }
 
             if(Input.GetButtonDown(_settingButtonName))
             {
                 isGrab = false;
-                _obj.layer = LayerMask.NameToLayer(_defaultLayerName);
 
                 _rb.useGravity = true;
                 _rb.isKinematic = false;
@@ -50,15 +53,14 @@ public class GrabObjectScript : MonoBehaviour
         }
         else//放しているとき
         {
-            if(Input.GetButtonDown(_settingButtonName) && ray)
+            if(ray)
             {
                 var collider = _hit.collider.gameObject.GetComponent<PortalableObject>();
 
-                if (collider)
+                if (Input.GetButtonDown(_settingButtonName) && collider)
                 {
                     isGrab = true;
                     _obj = _hit.collider.gameObject;
-                    _obj.layer = LayerMask.NameToLayer(_gripLayerName);
                     _halfScale = _obj.transform.localScale.magnitude / 2;
 
                     _rb = _obj.GetComponent<Rigidbody>();
@@ -68,12 +70,15 @@ public class GrabObjectScript : MonoBehaviour
                     _col = _obj.GetComponent<Collider>();
                     _col.isTrigger = true;
                 }
+                else if (_popUpText && collider)
+                {
+                    _popUpText.gameObject.SetActive(true);
+                }
+            }
+            else if (_popUpText && !ray)
+            {
+                _popUpText.gameObject.SetActive(false);
             }
         }
     }
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.green;
-    //    Gizmos.DrawRay(this.transform.position, this.transform.forward * _rayLength);
-    //}
 }

@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6885617832590214395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.75, y: 20.676668, z: -57.05}
-  m_LocalScale: {x: 9.963813, y: 7.7694, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,3 +61,5 @@ MonoBehaviour:
   _panel: {fileID: 0}
   _changeDuration: 3
   _nextSceneName: Chapter4
+  _optionImage: {fileID: 0}
+  _optionName: Cancel
