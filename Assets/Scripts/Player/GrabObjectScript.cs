@@ -7,6 +7,7 @@ public class GrabObjectScript : MonoBehaviour
 {
     RaycastHit _hit;
     bool isGrab;
+    bool isHit;
     Rigidbody _rb;
     Collider _col;
     GameObject _obj;
@@ -55,10 +56,10 @@ public class GrabObjectScript : MonoBehaviour
         {
             if(ray)
             {
-                var collider = _hit.collider.gameObject.GetComponent<PortalableObject>();
-
-                if (Input.GetButtonDown(_settingButtonName) && collider)
+                if (Input.GetButtonDown(_settingButtonName) && _hit.collider.gameObject.GetComponent<PortalableObject>())
                 {
+                    var collider = _hit.collider.gameObject.GetComponent<PortalableObject>();
+
                     isGrab = true;
                     _obj = _hit.collider.gameObject;
                     _halfScale = _obj.transform.localScale.magnitude / 2;
@@ -70,14 +71,20 @@ public class GrabObjectScript : MonoBehaviour
                     _col = _obj.GetComponent<Collider>();
                     _col.isTrigger = true;
                 }
-                else if (_popUpText && collider)
+
+                if (_popUpText && !isHit)
                 {
                     _popUpText.gameObject.SetActive(true);
+                    isHit = true;
                 }
             }
-            else if (_popUpText && !ray)
+            else
             {
-                _popUpText.gameObject.SetActive(false);
+                if (_popUpText && isHit)
+                {
+                    _popUpText.gameObject.SetActive(false);
+                    isHit = false;
+                }
             }
         }
     }

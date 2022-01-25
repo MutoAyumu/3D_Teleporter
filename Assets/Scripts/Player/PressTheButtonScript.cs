@@ -11,6 +11,7 @@ public class PressTheButtonScript : MonoBehaviour
     [SerializeField] LayerMask _hitLayer = default;
 
     RaycastHit _hit;
+    bool isHit;
 
     void Update()
     {
@@ -23,19 +24,23 @@ public class PressTheButtonScript : MonoBehaviour
 
         if(ray)
         {
-            var button = _hit.collider.GetComponent<PressedButtonScript>();
-
-            if(Input.GetButtonDown(_settingButtonName) && button)
+            if(Input.GetButtonDown(_settingButtonName) && _hit.collider.GetComponent<PressedButtonScript>())
             {
+                var button = _hit.collider.GetComponent<PressedButtonScript>();
                 button.Pressed();
             }
-            if (_popUpText && button)
+            if (_popUpText && !isHit)
             {
                 _popUpText.gameObject.SetActive(true);
+                isHit = true;
             }
-            else if (_popUpText && !button)
+        }
+        else
+        {
+            if (_popUpText && isHit)
             {
                 _popUpText.gameObject.SetActive(false);
+                isHit = false;
             }
         }
     }
