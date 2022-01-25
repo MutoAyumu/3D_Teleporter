@@ -42,6 +42,8 @@ public class Portal : MonoBehaviour
             // 新しいクリッププレーンに基づく投影の更新
             // Note: http://aras-p.info/texts/obliqueortho.html and http://www.terathon.com/lengyel/Lengyel-Oblique.pdf
             portalCamera.projectionMatrix = MainCamera.CalculateObliqueMatrix(clipPlaneCameraSpace);
+
+            portalCamera.Render();
         }
     }
 }
