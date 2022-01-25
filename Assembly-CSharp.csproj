@@ -65,7 +65,7 @@
     <Compile Include="Assets\Scripts\Player\IK\LookAtIK.cs" />
     <Compile Include="Assets\Scripts\Player\MathUtil.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Player\Portal.cs" />
+    <Compile Include="Assets\Scripts\Player\PortalCamera.cs" />
     <Compile Include="Assets\Scripts\Player\PortalScript.cs" />
     <Compile Include="Assets\Scripts\Player\PortalableObject.cs" />
     <Compile Include="Assets\Scripts\Player\PressTheButtonScript.cs" />

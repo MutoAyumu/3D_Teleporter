@@ -15,12 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene/Chapter2.unity
     guid: a6b744fe1ea8ce144bf8316c72ebdd69
   - enabled: 1
-    path: Assets/Scenes/GameScene/Chapter3.unity
-    guid: 9411034d9224c0447aafcde6977a6cfd
-  - enabled: 1
     path: Assets/Scenes/PresetScene.unity
     guid: 777e4cd41b08c0b4babf27d076a3d632
   - enabled: 1
-    path: Assets/Scenes/GameScene/Chapter4.unity
-    guid: 3670a63df5575a94b86e71dcf9d290c2
+    path: Assets/Scenes/GameScene/Chapter3.unity
+    guid: c98f5a16cfedff64384e82d21e932385
   m_configObjects: {}

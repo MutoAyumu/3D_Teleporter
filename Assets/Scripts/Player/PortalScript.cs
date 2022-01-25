@@ -9,33 +9,31 @@ public class PortalScript : MonoBehaviour
     [SerializeField] Color _portalColor = default;
     [SerializeField] LayerMask _placementMask = default;
     [SerializeField] Transform _testTransform = default;
-    [SerializeField] float _delay = 0.01f;
+    [SerializeField] float _delay = 0.001f;
 
     bool isPlaced;
     Collider _wallCollider = default;
     Renderer _renderer = default;
+    Material _material = default;
     Collider _collider = default;
     List<PortalableObject> _portalObjects = new List<PortalableObject>();
 
     public PortalScript OtherPortal { get => _otherPortal; set => _otherPortal = value; }
     public Color PortalColor { get => _portalColor; set => _portalColor = value; }
-    public bool IsPlaced { get => isPlaced; set => isPlaced = value; }
     public Renderer Renderer { get => _renderer; set => _renderer = value; }
 
     private void Awake()
     {
         _collider = GetComponent<Collider>();
         _renderer = GetComponent<Renderer>();
+        _material = _renderer.material;
     }
     private void Start()
     {
-        _outlineRenderer.material.SetColor("_OutlineColour", PortalColor);
         gameObject.SetActive(false);
     }
     private void Update()
     {
-        Renderer.enabled = OtherPortal.IsPlaced;
-
         for(int i = 0; i < _portalObjects.Count; ++i)
         {
             Vector3 obj = transform.InverseTransformPoint(_portalObjects[i].transform.position);
@@ -66,6 +64,15 @@ public class PortalScript : MonoBehaviour
             obj.ExitPortal(_wallCollider);
         }
     }
+    public void SetTexture(RenderTexture tex)
+    {
+        _material.mainTexture = tex;
+    }
+
+    public bool IsRendererVisible()
+    {
+        return _renderer.isVisible;
+    }
     public bool PlacePortal(Collider wallCollider, Vector3 pos, Quaternion rot)
     {
         _testTransform.position = pos;
@@ -82,7 +89,7 @@ public class PortalScript : MonoBehaviour
             transform.rotation = _testTransform.rotation;
 
             gameObject.SetActive(true);
-            IsPlaced = true;
+            isPlaced = true;
             return true;
         }
 
@@ -191,5 +198,9 @@ public class PortalScript : MonoBehaviour
         }
 
         return isOverlapping;
+    }
+    public bool IsPlaced()
+    {
+        return isPlaced;
     }
 }
