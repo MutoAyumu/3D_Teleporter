@@ -12,7 +12,7 @@ public class NewSceneCreator : EditorWindow
     protected readonly GUIContent _NameContent = new GUIContent("New Scene Name");
     protected readonly GUIContent _presetContent = new GUIContent("Preset Scene");
 
-    [MenuItem("Kit Tools/Create New Scene...", priority = 100)]
+    [MenuItem("Tools/CreateTemplateScene")]
     static void Init()
     {
         NewSceneCreator window = GetWindow<NewSceneCreator>();

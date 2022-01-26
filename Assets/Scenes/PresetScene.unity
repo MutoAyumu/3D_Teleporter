@@ -329,6 +329,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1735756345, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
+      propertyPath: portalCamera
+      value: 
+      objectReference: {fileID: 1571004199}
+    - target: {fileID: 1735756345, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
+      propertyPath: portals.Array.data[0]
+      value: 
+      objectReference: {fileID: 1481886995}
+    - target: {fileID: 1735756345, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
+      propertyPath: portals.Array.data[1]
+      value: 
+      objectReference: {fileID: 1618275779}
     - target: {fileID: 1866739959, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
       propertyPath: _popUpText
       value: 
@@ -445,29 +457,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9191626031579736773, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
---- !u!1 &223749573 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9191626031579736783, guid: 23a30c27d32a07741acb573a0affcf52,
-    type: 3}
-  m_PrefabInstance: {fileID: 223749572}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &223749574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223749573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc22219dd623124e9acd975a8d58ca1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portals:
-  - {fileID: 1481886995}
-  - {fileID: 1618275779}
-  portalCamera: {fileID: 1571004199}
-  iterations: 7
 --- !u!1001 &333903387
 PrefabInstance:
   m_ObjectHideFlags: 0
