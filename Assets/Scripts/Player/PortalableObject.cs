@@ -12,6 +12,7 @@ public class PortalableObject : MonoBehaviour
     protected GameManager _gmanager = default;
     Vector3 _angularVelocity;
     Vector3 _velocity;
+    GameObject _cloneObject;
 
     static readonly Quaternion _halfTurn = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     protected virtual void Awake()
@@ -19,6 +20,42 @@ public class PortalableObject : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
         _gmanager = GameObject.FindObjectOfType<GameManager>();
+
+        _cloneObject = new GameObject();
+        _cloneObject.SetActive(false);
+        var meshFilter = _cloneObject.AddComponent<MeshFilter>();
+        var meshRenderer = _cloneObject.AddComponent<MeshRenderer>();
+
+        meshFilter.mesh = GetComponent<MeshFilter>().mesh;
+        meshRenderer.materials = GetComponent<MeshRenderer>().materials;
+        _cloneObject.transform.localScale = transform.localScale;
+    }
+    private void LateUpdate()
+    {
+        if (_inPortal == null || _outPortal == null)
+        {
+            return;
+        }
+
+        if (_cloneObject.activeSelf && _inPortal.IsPlaced() && _outPortal.IsPlaced())
+        {
+            var inTransform = _inPortal.transform;
+            var outTransform = _outPortal.transform;
+
+            // Update position of clone.
+            Vector3 relativePos = inTransform.InverseTransformPoint(transform.position);
+            relativePos = _halfTurn * relativePos;
+            _cloneObject.transform.position = outTransform.TransformPoint(relativePos);
+
+            // Update rotation of clone.
+            Quaternion relativeRot = Quaternion.Inverse(inTransform.rotation) * transform.rotation;
+            relativeRot = _halfTurn * relativeRot;
+            _cloneObject.transform.rotation = outTransform.rotation * relativeRot;
+        }
+        else
+        {
+            _cloneObject.transform.position = new Vector3(-1000.0f, 1000.0f, -1000.0f);
+        }
     }
     private void OnEnable()
     {
@@ -67,11 +104,17 @@ public class PortalableObject : MonoBehaviour
         Physics.IgnoreCollision(_collider, wallCollider);
 
         ++_inPortalCount;
+        _cloneObject.SetActive(true);
     }
     public void ExitPortal(Collider wallCollider)
     {
         Physics.IgnoreCollision(_collider, wallCollider, false);
         --_inPortalCount;
+
+        if (_inPortalCount == 0)
+        {
+            _cloneObject.SetActive(false);
+        }
     }
     public virtual void Warp()
     {
