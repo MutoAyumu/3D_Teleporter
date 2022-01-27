@@ -5,16 +5,16 @@ using UnityEngine;
 public class PortalableObject : MonoBehaviour
 {
     int _inPortalCount;
-    PortalScript _inPortal = default;
-    PortalScript _outPortal = default;
+    protected PortalScript _inPortal = default;
+    protected PortalScript _outPortal = default;
     protected Rigidbody _rb = default;
     protected Collider _collider = default;
     protected GameManager _gmanager = default;
     Vector3 _angularVelocity;
     Vector3 _velocity;
-    GameObject _cloneObject;
+    protected GameObject _cloneObject;
 
-    static readonly Quaternion _halfTurn = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+    protected static readonly Quaternion _halfTurn = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -29,8 +29,9 @@ public class PortalableObject : MonoBehaviour
         meshFilter.mesh = GetComponent<MeshFilter>().mesh;
         meshRenderer.materials = GetComponent<MeshRenderer>().materials;
         _cloneObject.transform.localScale = transform.localScale;
+        _cloneObject.name = this.gameObject.name + "clone";
     }
-    private void LateUpdate()
+    protected virtual void LateUpdate()
     {
         if (_inPortal == null || _outPortal == null)
         {
@@ -42,12 +43,12 @@ public class PortalableObject : MonoBehaviour
             var inTransform = _inPortal.transform;
             var outTransform = _outPortal.transform;
 
-            // Update position of clone.
+            // クローンの位置を更新
             Vector3 relativePos = inTransform.InverseTransformPoint(transform.position);
             relativePos = _halfTurn * relativePos;
             _cloneObject.transform.position = outTransform.TransformPoint(relativePos);
 
-            // Update rotation of clone.
+            // クローンの回転を更新
             Quaternion relativeRot = Quaternion.Inverse(inTransform.rotation) * transform.rotation;
             relativeRot = _halfTurn * relativeRot;
             _cloneObject.transform.rotation = outTransform.rotation * relativeRot;

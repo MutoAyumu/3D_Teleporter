@@ -27,6 +27,7 @@ public class PortalScript : MonoBehaviour
         _collider = GetComponent<Collider>();
         _renderer = GetComponent<Renderer>();
         _material = _renderer.material;
+        _outlineRenderer.materials[0].color = PortalColor;
     }
     private void Start()
     {
