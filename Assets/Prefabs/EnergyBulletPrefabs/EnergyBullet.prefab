@@ -91,7 +91,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6522180363874763179}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -111,7 +111,7 @@ MonoBehaviour:
   _bulletSpeed: 4
   _portalLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
 --- !u!54 &3608137147400713692
 Rigidbody:
   m_ObjectHideFlags: 0

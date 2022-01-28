@@ -5,35 +5,45 @@ using UnityEngine;
 public class EnergyBulletScript : MonoBehaviour
 {
     [SerializeField] float _bulletSpeed = 1f;
-    [SerializeField] LayerMask _wallLayer = default;
+    [SerializeField] LayerMask _portalLayer = default;
     Rigidbody _rb;
-    int _count;
+    bool _warp;
     private void Start()
     {
         _rb = this.gameObject.GetComponent<Rigidbody>();
         _rb.velocity = this.transform.up * _bulletSpeed;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        var player = collision.gameObject.GetComponent<PlayerController>();
-
-        if(player)
+        Debug.Log(other.gameObject.layer);
+        if (_warp)//ワープしているとき
         {
-            //ここでプレイヤーに即死ダメージを与える
-        }
-
-        if(collision.gameObject.layer != _wallLayer)
-        {
-            _count++;
-
-            if (_count >= 2)
+            if (other.gameObject.layer != _portalLayer)
             {
-                Destroy(this.gameObject);
+                _warp = false;
+                Debug.Log("当たっている");
             }
         }
-        else
+        else if (!_warp)//ワープしていない時
         {
-            
+            if (other.gameObject.layer != _portalLayer)
+            {
+                _warp = true;
+                Debug.Log("当たっていない");
+            }
+            else
+            {
+                var player = other.gameObject.GetComponent<PlayerController>();
+
+                if (player)
+                {
+                    //ここで殺す
+                }
+                else
+                {
+                    Destroy(this.gameObject);
+                }
+            }
         }
     }
 }

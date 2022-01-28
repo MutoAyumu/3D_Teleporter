@@ -172,7 +172,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-41440
+  m_Name: pb_Mesh-1728
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -33663,7 +33663,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-41420
+  m_Name: pb_Mesh-1708
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -36346,7 +36346,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-41628
+  m_Name: pb_Mesh-1946
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -50849,6 +50849,11 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 838205303}
+    - target: {fileID: 3510680352410832561, guid: f2e6914c15218a742a85d252e3fdf6d5,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4340491629937313340, guid: f2e6914c15218a742a85d252e3fdf6d5,
         type: 3}
       propertyPath: m_Name
