@@ -11,11 +11,12 @@ public class EnergyBulletReceptor : MonoBehaviour
 
     public bool IsHit { get => isHit; }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.layer != _bulletLayer)
+        if (collision.gameObject.layer != _bulletLayer)
         {
             isHit = true;
+            Destroy(collision.gameObject);
             _event.Invoke();
         }
     }

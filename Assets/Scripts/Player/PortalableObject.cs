@@ -58,45 +58,6 @@ public class PortalableObject : MonoBehaviour
             _cloneObject.transform.position = new Vector3(-1000.0f, 1000.0f, -1000.0f);
         }
     }
-    private void OnEnable()
-    {
-        if (_gmanager)
-        {
-            _gmanager.OnPauseResume += PauseResume;
-        }
-    }
-    private void OnDisable()
-    {
-        if (_gmanager)
-        {
-            _gmanager.OnPauseResume -= PauseResume;
-        }
-    }
-    void PauseResume(bool isPause)
-    {
-        if (isPause)
-        {
-            Pause();
-        }
-        else
-        {
-            Resume();
-        }
-    }
-    protected virtual void Pause()
-    {
-        // 速度・回転を保存し、Rigidbody を停止する
-        _angularVelocity = _rb.angularVelocity;
-        _velocity = _rb.velocity;
-        _rb.Sleep();
-    }
-    protected virtual void Resume()
-    {
-        // Rigidbody の活動を再開し、保存しておいた速度・回転を戻す
-        _rb.WakeUp();
-        _rb.angularVelocity = _angularVelocity;
-        _rb.velocity = _velocity;
-    }
     public void SetInPortal(PortalScript inPortal, PortalScript outPortal, Collider wallCollider)
     {
         _inPortal = inPortal;
@@ -144,5 +105,48 @@ public class PortalableObject : MonoBehaviour
         var tmp = _inPortal;
         _inPortal = _outPortal;
         _outPortal = tmp;
+    }
+    private void OnEnable()
+    {
+        if (_gmanager)
+        {
+            _gmanager.OnPauseResume += PauseResume;
+        }
+    }
+    private void OnDisable()
+    {
+        if (_gmanager)
+        {
+            _gmanager.OnPauseResume -= PauseResume;
+        }
+    }
+    void PauseResume(bool isPause)
+    {
+        if (isPause)
+        {
+            Pause();
+        }
+        else
+        {
+            Resume();
+        }
+    }
+    protected virtual void Pause()
+    {
+        // 速度・回転を保存し、Rigidbody を停止する
+        _angularVelocity = _rb.angularVelocity;
+        _velocity = _rb.velocity;
+        _rb.Sleep();
+    }
+    protected virtual void Resume()
+    {
+        // Rigidbody の活動を再開し、保存しておいた速度・回転を戻す
+        _rb.WakeUp();
+        _rb.angularVelocity = _angularVelocity;
+        _rb.velocity = _velocity;
+    }
+    private void OnDestroy()
+    {
+        Destroy(_cloneObject);
     }
 }
