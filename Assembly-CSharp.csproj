@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\EnergyBulletReceptor.cs" />
     <Compile Include="Assets\Scripts\EnergyBulletScript.cs" />
     <Compile Include="Assets\Scripts\LaserPointer.cs" />
+    <Compile Include="Assets\Scripts\LaserRobotScript.cs" />
     <Compile Include="Assets\Scripts\MovingFloor.cs" />
     <Compile Include="Assets\Scripts\Player\Crosshair.cs" />
     <Compile Include="Assets\Scripts\Player\GrabObjectScript.cs" />
