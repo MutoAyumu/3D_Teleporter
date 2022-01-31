@@ -5,7 +5,6 @@ using UnityEngine;
 public class LaserRobotScript : MonoBehaviour
 {
     [SerializeField] Transform _rayPos = default;
-    [SerializeField] Transform _setPos = default;
     [SerializeField] float _rayDirection = 100f;
     [SerializeField] LineRenderer _line = default;
     [SerializeField] float _lineWidth = 0.05f;
@@ -18,6 +17,7 @@ public class LaserRobotScript : MonoBehaviour
     private void Start()
     {
         _lastPos = _rayPos.position;
+        _line.SetPosition(0, _rayPos.position);
         _line.startWidth = _lineWidth;
         _line.endWidth = _lineWidth;
     }
@@ -29,13 +29,14 @@ public class LaserRobotScript : MonoBehaviour
     void LaserPoint()
     {
         RaycastHit hit;
-        var ray = Physics.Raycast(_rayPos.position, _setPos.position, out hit, _rayDirection);
+        var ray = Physics.Raycast(_rayPos.position, _rayPos.forward, out hit, _rayDirection);
+        Debug.DrawRay(_rayPos.position, _rayPos.forward * _rayDirection, Color.red);
 
         if (!ray)//rayが何にも当たっていない時は
         {
-            _line.SetPosition(1, _setPos.position);
+            _line.SetPosition(1, _rayPos.forward * _rayDirection);
         }
-        else
+        else//rayが当たっているとき
         {
             if (!isFire)
             {
@@ -44,11 +45,10 @@ public class LaserRobotScript : MonoBehaviour
             _line.SetPosition(1, hit.point);
         }
 
-        if(_lastPos != this.transform.position)//レーザーの原点の変更
+        if(_lastPos != _rayPos.position)//レーザーの原点の変更
         {
-            _lastPos = this.transform.position;
+            _lastPos = _rayPos.position;
             _line.SetPosition(0, _rayPos.position);
-            Debug.Log("move");
         }
     }
     void Fire(RaycastHit hit)
