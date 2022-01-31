@@ -6,43 +6,55 @@ public class EnergyBulletScript : MonoBehaviour
 {
     [SerializeField] float _bulletSpeed = 1f;
     [SerializeField] LayerMask _portalLayer = default;
+    [SerializeField] float _timeLimit = 0.1f;
     Rigidbody _rb;
+    float _timer;
     bool _warp;
     private void Start()
     {
         _rb = this.gameObject.GetComponent<Rigidbody>();
         _rb.velocity = this.transform.up * _bulletSpeed;
     }
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        Debug.Log(other.gameObject.layer);
-        if (_warp)//ワープしているとき
+        if(_warp)
         {
-            if (other.gameObject.layer != _portalLayer)
+            _timer += Time.deltaTime;
+
+            if(_timer >= _timeLimit)
             {
                 _warp = false;
-                Debug.Log("当たっている");
+                _timer = 0;
             }
         }
-        else if (!_warp)//ワープしていない時
+    }
+    private void OnCollisionEnter(Collision other)
+    {
+        if (!_warp)
         {
-            if (other.gameObject.layer != _portalLayer)
+            var player = other.gameObject.GetComponent<PlayerController>();
+
+            if (player)
             {
-                _warp = true;
-                Debug.Log("当たっていない");
+                //ここで殺す
+                Debug.Log("kill");
+                Destroy(this.gameObject);
             }
             else
             {
-                var player = other.gameObject.GetComponent<PlayerController>();
-
-                if (player)
-                {
-                    //ここで殺す
-                }
-                else
-                {
-                    Destroy(this.gameObject);
-                }
+                Destroy(this.gameObject);
+                Debug.Log("消えた");
+            }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!_warp)//ワープしていない時
+        {
+            if (other.gameObject.layer != _portalLayer)//wallLayerに当たった時
+            {
+                _warp = true;
+                Debug.Log("hit");
             }
         }
     }
