@@ -17,6 +17,7 @@ public class PlayerController : PortalableObject
     [SerializeField] float _moveSpeed = 3f;
     [SerializeField] float _jumpPower = 15f;
     [SerializeField] string _settingButtonName = "Jump";
+    [SerializeField] float _hitPoint = 100;
     [Space(10), Header("IsGround")]
     [SerializeField] Transform _footPos = default;
     [SerializeField] Vector3 _rayDistance = Vector3.zero;
@@ -130,6 +131,18 @@ public class PlayerController : PortalableObject
         {
             isGround = false;
             _anim.SetBool("IsGround", false);
+        }
+    }
+    public void Damage(float damage)
+    {
+        if(_hitPoint > 0)//体力が0以上の時は計算する
+        {
+            _hitPoint -= damage;
+            Debug.Log(_hitPoint);
+        }
+        else
+        {
+            Debug.Log("Dead");
         }
     }
     public override void Warp()
