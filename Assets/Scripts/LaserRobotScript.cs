@@ -5,14 +5,17 @@ using UnityEngine;
 public class LaserRobotScript : MonoBehaviour
 {
     [SerializeField] Transform _rayPos = default;
-    [SerializeField] float _rayDirection = 100f;
+    [SerializeField] float _rayDistance = 100f;
     [SerializeField] LineRenderer _line = default;
     [SerializeField] float _lineWidth = 0.05f;
     [SerializeField] int _power = 1;
     [SerializeField] float _coolTime = 0.5f;
+    [SerializeField] float _groundRayDistance = 1;
+    [SerializeField] LayerMask _groundLayer = default;
     Vector3 _lastPos = default;
     float _timer = default;
     bool isFire;
+    bool isGround = true;
 
     private void Start()
     {
@@ -23,18 +26,22 @@ public class LaserRobotScript : MonoBehaviour
     }
     private void Update()
     {
-        LaserPoint();
-        CoolTime();
+        if (isGround)//一度でも接地判定がなくなれば動かないようにする
+        {
+            LaserPoint();
+            IsGround();
+            CoolTime();
+        }
     }
     void LaserPoint()
     {
         RaycastHit hit;
-        var ray = Physics.Raycast(_rayPos.position, _rayPos.forward, out hit, _rayDirection);
-        Debug.DrawRay(_rayPos.position, _rayPos.forward * _rayDirection, Color.red);
+        var ray = Physics.Raycast(_rayPos.position, _rayPos.forward, out hit, _rayDistance);
+        Debug.DrawRay(_rayPos.position, _rayPos.forward * _rayDistance, Color.red);
 
         if (!ray)//rayが何にも当たっていない時は
         {
-            _line.SetPosition(1, _rayPos.forward * _rayDirection);
+            _line.SetPosition(1, _rayPos.position + _rayPos.forward * _rayDistance);
         }
         else//rayが当たっているとき
         {
@@ -43,6 +50,9 @@ public class LaserRobotScript : MonoBehaviour
                 Fire(hit);
             }
             _line.SetPosition(1, hit.point);
+            var pos = hit.transform.position;
+            pos.y = this.transform.position.y;
+            this.transform.LookAt(pos, this.transform.up);//自身の向きを変更
         }
 
         if(_lastPos != _rayPos.position)//レーザーの原点の変更
@@ -72,6 +82,17 @@ public class LaserRobotScript : MonoBehaviour
                 isFire = false;
                 _timer = 0;
             }
+        }
+    }
+    void IsGround()
+    {
+        var ray = Physics.Raycast(this.transform.position, this.transform.up * -1, _groundRayDistance, _groundLayer);
+        Debug.DrawRay(this.transform.position, this.transform.up * -1 * _groundRayDistance, Color.green);
+
+        if (!ray)
+        {
+            isGround = false;
+            _line.enabled = false;
         }
     }
 }
