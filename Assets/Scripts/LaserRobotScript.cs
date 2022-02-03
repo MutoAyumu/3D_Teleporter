@@ -12,6 +12,7 @@ public class LaserRobotScript : MonoBehaviour
     [SerializeField] float _coolTime = 0.5f;
     [SerializeField] float _groundRayDistance = 1;
     [SerializeField] LayerMask _groundLayer = default;
+    [SerializeField] Animator _effect = default;
     Vector3 _lastPos = default;
     float _timer = default;
     bool isFire;
@@ -42,6 +43,7 @@ public class LaserRobotScript : MonoBehaviour
         if (!ray)//rayが何にも当たっていない時は
         {
             _line.SetPosition(1, _rayPos.position + _rayPos.forward * _rayDistance);
+            _effect.gameObject.SetActive(false);
         }
         else//rayが当たっているとき
         {
@@ -69,6 +71,11 @@ public class LaserRobotScript : MonoBehaviour
         {
             player.Damage(_power);
             isFire = true;
+            _effect.gameObject.SetActive(true);
+        }
+        else
+        {
+            _effect.gameObject.SetActive(false);
         }
     }
     void CoolTime()
