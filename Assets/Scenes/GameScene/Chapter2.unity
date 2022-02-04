@@ -4986,7 +4986,7 @@ PrefabInstance:
     - target: {fileID: 9191626031579736777, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 23351
+      value: 88887
       objectReference: {fileID: 0}
     - target: {fileID: 9191626032807756160, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
@@ -5006,7 +5006,7 @@ PrefabInstance:
     - target: {fileID: 9191626032807756163, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.5
+      value: 4.59
       objectReference: {fileID: 0}
     - target: {fileID: 9191626032807756163, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
@@ -5058,6 +5058,11 @@ PrefabInstance:
       propertyPath: _crosshair
       value: 
       objectReference: {fileID: 37627879}
+    - target: {fileID: 9191626032821837882, guid: 23a30c27d32a07741acb573a0affcf52,
+        type: 3}
+      propertyPath: _wallLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 9191626032821837882, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
       propertyPath: _portals.Array.data[0]

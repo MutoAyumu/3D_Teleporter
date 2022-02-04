@@ -27870,11 +27870,11 @@ MonoBehaviour:
   _line: {fileID: 2942603765768925407}
   _lineWidth: 0.01
   _power: 1
-  _coolTime: 0.1
+  _coolTime: 0.05
   _groundRayDistance: 2
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65792
   _effect: {fileID: 1012267253}
   _player: {fileID: 0}
 --- !u!120 &2942603765768925407
