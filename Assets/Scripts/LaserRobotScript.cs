@@ -13,6 +13,7 @@ public class LaserRobotScript : MonoBehaviour
     [SerializeField] float _groundRayDistance = 1;
     [SerializeField] LayerMask _groundLayer = default;
     [SerializeField] Animator _effect = default;
+    [SerializeField] PlayerController _player = default;
     Vector3 _lastPos = default;
     float _timer = default;
     bool isFire;
@@ -52,9 +53,6 @@ public class LaserRobotScript : MonoBehaviour
                 Fire(hit);
             }
             _line.SetPosition(1, hit.point);
-            var pos = hit.transform.position;
-            pos.y = this.transform.position.y;
-            this.transform.LookAt(pos, this.transform.up);//自身の向きを変更
         }
 
         if(_lastPos != _rayPos.position)//レーザーの原点の変更
@@ -65,11 +63,9 @@ public class LaserRobotScript : MonoBehaviour
     }
     void Fire(RaycastHit hit)
     {
-        var player = hit.collider.GetComponent<PlayerController>();
-
-        if (player)//プレイヤーだったら
+        if (hit.collider.CompareTag("Player"))//プレイヤーだったら
         {
-            player.Damage(_power);
+            _player.Damage(_power);
             isFire = true;
             _effect.gameObject.SetActive(true);
         }
@@ -100,6 +96,16 @@ public class LaserRobotScript : MonoBehaviour
         {
             isGround = false;
             _line.enabled = false;
+            _effect.gameObject.SetActive(false);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player") && isGround)
+        {
+            var pos = _player.transform.position;
+            pos.y = this.transform.position.y;
+            this.transform.LookAt(pos, this.transform.up);//自身の向きを変更
         }
     }
 }
