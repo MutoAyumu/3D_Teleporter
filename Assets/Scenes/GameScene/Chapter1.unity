@@ -13582,6 +13582,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1922136343}
     m_Modifications:
+    - target: {fileID: 1806568768317201109, guid: a93a94e4438635a4faa9c2586fc9395d,
+        type: 3}
+      propertyPath: isLaunch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2864344878757342903, guid: a93a94e4438635a4faa9c2586fc9395d,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -17209,6 +17214,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1922136343}
     m_Modifications:
+    - target: {fileID: 1806568768317201109, guid: a93a94e4438635a4faa9c2586fc9395d,
+        type: 3}
+      propertyPath: isLaunch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2864344878757342903, guid: a93a94e4438635a4faa9c2586fc9395d,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -17347,6 +17357,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PortalCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509401993961322148, guid: 135421417a3fa3740853e5263b56a611,
+        type: 3}
+      propertyPath: m_ShowToolkit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7509401993961322148, guid: 135421417a3fa3740853e5263b56a611,
+        type: 3}
+      propertyPath: m_ShowCustomSorter
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 135421417a3fa3740853e5263b56a611, type: 3}
