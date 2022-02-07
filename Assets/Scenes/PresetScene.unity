@@ -372,7 +372,7 @@ PrefabInstance:
     - target: {fileID: 9191626031579736777, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 72503
+      value: 203575
       objectReference: {fileID: 0}
     - target: {fileID: 9191626032641448813, guid: 23a30c27d32a07741acb573a0affcf52,
         type: 3}
@@ -1939,7 +1939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1157172466}
   - component: {fileID: 1157172465}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: postProssesing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

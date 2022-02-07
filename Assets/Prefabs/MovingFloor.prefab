@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8104939701435095775}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pos2
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2864344878757342903}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: pos1
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 5330542099641097774}
   - component: {fileID: 5330542099641097775}
   - component: {fileID: 1806568768317201109}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,6 +185,7 @@ MonoBehaviour:
   - {fileID: 8104939701435095775}
   _moveSpeed: 1
   _stopDistance: 0.2
+  isLaunch: 0
 --- !u!1 &5330542100540874970
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5330542100540874965}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: MovingFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

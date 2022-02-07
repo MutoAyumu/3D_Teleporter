@@ -7,11 +7,13 @@ public class MovingFloor : MonoBehaviour
     [SerializeField, Tooltip("ポイント")] Transform[] _points = default;
     [SerializeField, Tooltip("スピード")] float _moveSpeed = 1f;
     [SerializeField, Tooltip("移動先を切り替えるときのポイントとの距離")] float _stopDistance = 0.2f;
+    [SerializeField, Tooltip("起動用のフラグ")] bool isLaunch;
 
     Vector3 _move;
     int _count;
     GameManager _gmanager;
     bool isPause;
+
     private void Awake()
     {
         _gmanager = GameObject.FindObjectOfType<GameManager>();
@@ -33,7 +35,7 @@ public class MovingFloor : MonoBehaviour
     }
     private void Update()
     {
-        if (!isPause)
+        if (!isPause && isLaunch)
         {
             Patrol();
         }
@@ -73,6 +75,10 @@ public class MovingFloor : MonoBehaviour
         {
             collision.gameObject.transform.parent = null;
         }
+    }
+    public void IsLaunch()
+    {
+        isLaunch = true;
     }
     void PauseResume(bool isPause)
     {
