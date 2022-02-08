@@ -27,11 +27,14 @@ public class PlayerController : PortalableObject
     [SerializeField] Vector3 _rayDistance = Vector3.zero;
     [SerializeField] LayerMask _groundLayer = default;
     [SerializeField] PostProcessVolume _playerVolume = default;
+    [SerializeField] string _respawnTag = "Respawn";
+
     Vignette _vignette;
     ChromaticAberration _chromatic;
 
     Quaternion _targetRotation;
     Vector3 _dir;
+    Vector3 _respawnPos;
     bool isGround;
     bool isPause;
     bool isDead;
@@ -54,6 +57,7 @@ public class PlayerController : PortalableObject
         var profile = _playerVolume.profile;
         _vignette = profile.GetSetting<Vignette>();
         _chromatic = profile.GetSetting<ChromaticAberration>();
+        _respawnPos = this.transform.position;
     }
 
     private void Update()
@@ -216,14 +220,24 @@ public class PlayerController : PortalableObject
             }
         }
     }
-    void ReStart()
+    public void ReStart()
     {
         isDead = false;
         _playerAnim.SetBool("Dead", isDead);
         _currentHP = _hitPoint;
         _vignette.intensity.value = 0;
         _chromatic.intensity.value = 0;
+        _body.SetActive(true);
+        this.transform.position = _respawnPos;
         Debug.Log("リスタートしました");
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag(_respawnTag))
+        {
+            _respawnPos = this.transform.position;
+            Debug.Log("リスポーン位置を変更しました : " + _respawnPos);
+        }
     }
     public override void Warp()
     {

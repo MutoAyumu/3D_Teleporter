@@ -12,8 +12,10 @@ public class LaserRobotScript : MonoBehaviour
     [SerializeField] float _coolTime = 0.5f;
     [SerializeField] float _groundRayDistance = 1;
     [SerializeField] LayerMask _groundLayer = default;
+    [SerializeField] LayerMask _hitLayer = default;
     [SerializeField] Animator _effect = default;
     [SerializeField] PlayerController _player = default;
+
     Vector3 _lastPos = default;
     float _timer = default;
     bool isFire;
@@ -38,7 +40,7 @@ public class LaserRobotScript : MonoBehaviour
     void LaserPoint()
     {
         RaycastHit hit;
-        var ray = Physics.Raycast(_rayPos.position, _rayPos.forward, out hit, _rayDistance);
+        var ray = Physics.Raycast(_rayPos.position, _rayPos.forward, out hit, _rayDistance, _hitLayer);
         Debug.DrawRay(_rayPos.position, _rayPos.forward * _rayDistance, Color.red);
 
         if (!ray)//rayが何にも当たっていない時は
