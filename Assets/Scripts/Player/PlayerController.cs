@@ -14,6 +14,7 @@ public class PlayerController : PortalableObject
     [SerializeField] Transform _eye = default;
     [SerializeField] GameObject _body = default;
     [SerializeField] Animator _gunModel = default;
+    [SerializeField] Animator _playerAnim = default;
     [Space(10), Header("PlayerMove")]
     [SerializeField] float _moveSpeed = 3f;
     [SerializeField] float _jumpPower = 15f;
@@ -33,6 +34,7 @@ public class PlayerController : PortalableObject
     Vector3 _dir;
     bool isGround;
     bool isPause;
+    bool isDead;
     bool isDamage;
     bool isRecover;
     Animator _anim;
@@ -56,7 +58,7 @@ public class PlayerController : PortalableObject
 
     private void Update()
     {
-        if (!isPause)
+        if (!isPause && !isDead)
         {
             CameraMove();
             InputMove();
@@ -169,6 +171,10 @@ public class PlayerController : PortalableObject
         else
         {
             Debug.Log("Dead");
+            isDead = true;
+            _playerAnim.SetBool("Dead", isDead);
+            _rb.velocity = Vector3.zero;
+            _body.SetActive(false);
         }
     }
     void Recovery()
@@ -209,6 +215,15 @@ public class PlayerController : PortalableObject
                 Debug.Log("全回復しました");
             }
         }
+    }
+    void ReStart()
+    {
+        isDead = false;
+        _playerAnim.SetBool("Dead", isDead);
+        _currentHP = _hitPoint;
+        _vignette.intensity.value = 0;
+        _chromatic.intensity.value = 0;
+        Debug.Log("リスタートしました");
     }
     public override void Warp()
     {
