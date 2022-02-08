@@ -27875,6 +27875,9 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 65792
+  _hitLayer:
+    serializedVersion: 2
+    m_Bits: 245559
   _effect: {fileID: 1012267253}
   _player: {fileID: 0}
 --- !u!120 &2942603765768925407
