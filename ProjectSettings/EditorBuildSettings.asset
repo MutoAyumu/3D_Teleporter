@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScenes/BulletTest.unity
     guid: 38cf4cfb7a73f164cae587402837ff8d
+  - enabled: 1
+    path: Assets/Scenes/GameScene/TextTestScene.unity
+    guid: 9ebc79c6b0dd5094491e2028a44333a6
   m_configObjects: {}
