@@ -76,7 +76,7 @@
     <Compile Include="Assets\Scripts\System\GameManager.cs" />
     <Compile Include="Assets\Scripts\System\StageManager.cs" />
     <Compile Include="Assets\Scripts\System\WarldText\TextPopUpScript.cs" />
-    <Compile Include="Assets\Scripts\System\WarldText\TextTest.cs" />
+    <Compile Include="Assets\Scripts\System\WarldText\TextScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Shaders\PortalMask.shader" />
