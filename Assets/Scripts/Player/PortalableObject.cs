@@ -63,6 +63,7 @@ public class PortalableObject : MonoBehaviour
         _inPortal = inPortal;
         _outPortal = outPortal;
 
+        //
         Physics.IgnoreCollision(_collider, wallCollider);
 
         ++_inPortalCount;
@@ -83,8 +84,10 @@ public class PortalableObject : MonoBehaviour
         var inTransform = _inPortal.transform;
         var outTransform = _outPortal.transform;
 
+        //ポータルに入ったオブジェクトの座標をinTransformのローカル座標に変換
         Vector3 relativePos = inTransform.InverseTransformPoint(this.transform.position);
         relativePos = _halfTurn * relativePos;
+        //TransformPointでrelativePosをoutTransformのワールド座標に変換
         this.transform.position = outTransform.TransformPoint(relativePos);
 
         var inRot = inTransform.rotation;
@@ -93,13 +96,16 @@ public class PortalableObject : MonoBehaviour
         var outRot = outTransform.rotation;
         outRot.x = 0;
         outRot.z = 0;
+        //inRotを逆にする(Quaternion.Inverseで)
         Quaternion relativeRot = Quaternion.Inverse(inRot) * this.transform.rotation;
         relativeRot = _halfTurn * relativeRot;
         this.transform.rotation = outRot * relativeRot;
 
         var warpPower = 1.05f;
+        //ポータルに入っているオブジェクトの方向ベクトルをinTransformのローカル座標に変換
         Vector3 relativeVel = inTransform.InverseTransformDirection(_rb.velocity);
         relativeVel = _halfTurn * relativeVel;
+        //relativeVelをoutTransformのワールド座標に変換
         _rb.velocity = outTransform.TransformDirection(relativeVel) * warpPower;
 
         var tmp = _inPortal;
