@@ -37,9 +37,10 @@ public class PortalScript : MonoBehaviour
     {
         for(int i = 0; i < _portalObjects.Count; ++i)
         {
+            //ポータル内に入っているオブジェクトの座標をポータルのローカル座標に変更
             Vector3 obj = transform.InverseTransformPoint(_portalObjects[i].transform.position);
 
-            if(obj.z > 0.0f)
+            if(obj.z > _delay)
             {
                 _portalObjects[i].Warp();
             }

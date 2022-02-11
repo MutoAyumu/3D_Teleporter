@@ -246,7 +246,6 @@ public class PlayerController : PortalableObject
     public override void Warp()
     {
         base.Warp();
-
         TargetRotation = Quaternion.LookRotation(_eye.transform.forward, Vector3.up);
     }
     protected override void Pause()
