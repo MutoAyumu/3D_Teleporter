@@ -38,6 +38,7 @@ public class EnergyBulletScript : MonoBehaviour
             {
                 //ここで殺す
                 Debug.Log("kill");
+                player.Damage(100);
                 Destroy(this.gameObject);
             }
             else

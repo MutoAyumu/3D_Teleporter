@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] string _nextSceneName = " ";
     [SerializeField] Image _optionImage = default;
     [SerializeField] string _optionName = "Cancel";
+    [SerializeField] Crosshair _portalImage = default;
 
     bool isPause = false;
     event Action<bool> _onPauseResume = default;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
         {
             PauseResume();
             _optionImage.gameObject.SetActive(false);
+            _portalImage.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.Locked;
             _tweener.Play();
         }
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         {
             PauseResume();
             _optionImage.gameObject.SetActive(true);
+            _portalImage.gameObject.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
             _tweener.Pause();
         }
