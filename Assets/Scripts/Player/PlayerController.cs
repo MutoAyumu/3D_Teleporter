@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine;
+using DG.Tweening;
 
 /// <summary>プレイヤーにつける</summary>
 public class PlayerController : PortalableObject
@@ -154,9 +155,9 @@ public class PlayerController : PortalableObject
             _anim.SetBool("IsGround", false);
         }
     }
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
-        if (_currentHP > 0)//体力が0以上の時は計算する
+        if (_currentHP >= 0)//体力が0以上の時は計算する
         {
             _currentHP -= damage;
             isDamage = true;
@@ -171,14 +172,17 @@ public class PlayerController : PortalableObject
                 _chromatic.intensity.value += 1 / _hitPoint;
             }
             Debug.Log("HP" + _currentHP + "Vignette" + _vignette.intensity.value + "Chromatic" + _chromatic.intensity.value);
-        }
-        else
-        {
-            Debug.Log("Dead");
-            isDead = true;
-            _playerAnim.SetBool("Dead", isDead);
-            _rb.velocity = Vector3.zero;
-            _body.SetActive(false);
+
+            if(_currentHP <= 0)
+            {
+                Debug.Log("Dead");
+                isDead = true;
+                DOVirtual.Float(_vignette.intensity.value, 0.5f, 0.8f, value => _vignette.intensity.value = value);
+                DOVirtual.Float(_chromatic.intensity.value, 1f, 0.8f, value => _chromatic.intensity.value = value);
+                _playerAnim.SetBool("Dead", isDead);
+                _rb.velocity = Vector3.zero;
+                _body.SetActive(false);
+            }
         }
     }
     void Recovery()
