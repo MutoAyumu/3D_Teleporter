@@ -10,6 +10,8 @@ public class PortalScript : MonoBehaviour
     [SerializeField] LayerMask _placementMask = default;
     [SerializeField] Transform _testTransform = default;
     [SerializeField] float _delay = 0.001f;
+    [SerializeField] ParticleSystem _particle = default;
+    [SerializeField] Animator _setAnim = default;
 
     bool isPlaced;
     Collider _wallCollider = default;
@@ -91,10 +93,14 @@ public class PortalScript : MonoBehaviour
             transform.rotation = _testTransform.rotation;
 
             gameObject.SetActive(true);
+            _setAnim.Play("SetPortalAnim");
             isPlaced = true;
             return true;
         }
 
+        //Portalを置けない時にパーティクルを出す
+        _particle.transform.position = _testTransform.position;
+        _particle.Play();
         return false;
     }
     void FixOverhangs()
