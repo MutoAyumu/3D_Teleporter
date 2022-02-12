@@ -34017,6 +34017,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 456550594}
   m_CullTransparentMesh: 0
+--- !u!82 &466489911 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1852231766539575282, guid: 6eed1b6ba2b845d44976fcaef67bcb1d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1720618137}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &468376545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1548737089427028781, guid: 8d12504c6cdb8fd4ba18aaa308af432f,
@@ -38949,6 +38955,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 466489911}
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1330093503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39349,7 +39366,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh25948
+  m_Name: pb_Mesh51258
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

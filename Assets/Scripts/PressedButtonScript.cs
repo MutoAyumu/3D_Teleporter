@@ -8,6 +8,7 @@ public class PressedButtonScript : MonoBehaviour
     [SerializeField] UnityEvent _startEvent = default;
     [SerializeField] UnityEvent _endEvent = default;
     [SerializeField] float _intervalTime = 7f;
+    [SerializeField] AudioSource _buttonAudio = default;
 
     bool isOn;
     float _timer;
@@ -29,6 +30,7 @@ public class PressedButtonScript : MonoBehaviour
     public void Pressed()
     {
         _timer = 0;
+        _buttonAudio.Play();
 
         if (!isOn)
         {

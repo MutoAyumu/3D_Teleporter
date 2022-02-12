@@ -2893,7 +2893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cameraSpeed: 3
-  _cameraValue: {x: -75, y: 50}
+  _cameraValue: {x: -75, y: 75}
   _slerpSpeed: 15
   _eye: {fileID: 9191626032821837883}
   _body: {fileID: 919132149417505822}
@@ -2906,7 +2906,7 @@ MonoBehaviour:
   _recoveryTime: 3
   _recoverPoint: 5
   _footPos: {fileID: 9191626032924988964}
-  _rayDistance: {x: 0, y: -0.3, z: 0}
+  _rayDistance: {x: 0, y: -0.5, z: 0}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 65792
