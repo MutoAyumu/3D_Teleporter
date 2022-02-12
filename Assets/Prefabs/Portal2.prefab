@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 1345233137501871199}
   - component: {fileID: 1345233137501871196}
   - component: {fileID: 1345233137501871197}
+  - component: {fileID: 5531041487919065704}
   m_Layer: 9
   m_Name: Portal2
   m_TagString: Untagged
@@ -257,7 +258,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dd86ff0a0cef2024abbd281a164bad49, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -311,3 +312,25 @@ MonoBehaviour:
     m_Bits: 768
   _testTransform: {fileID: 1345233136632381976}
   _delay: 0.01
+  _particle: {fileID: 7546420615011487212, guid: f30f892d7747fad4f91c6209d2cec8ad,
+    type: 3}
+  _setAnim: {fileID: 5531041487919065704}
+--- !u!95 &5531041487919065704
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345233137501871195}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c75e9fe870143364bb20eae47aad343b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
