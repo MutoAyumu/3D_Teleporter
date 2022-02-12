@@ -10,6 +10,7 @@ public class SetUpPortal : MonoBehaviour
     [SerializeField] Crosshair _crosshair = default;
     [SerializeField] float _rayDistance = 50f;
     [SerializeField] Animator _gunModel = default;
+    [SerializeField] AudioSource _shootAudio = default;
     float _animSpeed;
     
     [SerializeField]PlayerController _player = default;
@@ -36,11 +37,13 @@ public class SetUpPortal : MonoBehaviour
         {
             FirePortal(0, this.transform.position, this.transform.forward, _rayDistance);
             _gunModel.SetTrigger("Shoot");
+            _shootAudio.Play();
         }
         else if(Input.GetButtonDown("Fire2"))
         {
             FirePortal(1, this.transform.position, this.transform.forward, _rayDistance);
             _gunModel.SetTrigger("Shoot");
+            _shootAudio.Play();
         }
     }
     void FirePortal(int portalID, Vector3 pos, Vector3 dir, float distance)
