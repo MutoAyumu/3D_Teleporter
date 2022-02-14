@@ -171,7 +171,8 @@ AudioSource:
   m_GameObject: {fileID: 1427593342}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -382558067809326357, guid: a4ffe406233c73b4a94cf610137d09ac,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: d54fe41cfed242f4c9290070febf719a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3163,7 +3164,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _crosshair: {fileID: 0}
-  _rayDistance: 20
+  _rayDistance: 50
   _gunModel: {fileID: 1434856382}
   _shootAudio: {fileID: 7271179228748360593}
   _player: {fileID: 9191626032807756162}

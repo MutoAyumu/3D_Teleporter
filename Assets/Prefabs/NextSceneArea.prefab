@@ -59,7 +59,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nextChapterNumber: 0
   _panel: {fileID: 0}
-  _changeDuration: 3
+  _changeDuration: 1
   _nextSceneName: Chapter4
   _optionImage: {fileID: 0}
   _optionName: Cancel
+  _portalImage: {fileID: 0}

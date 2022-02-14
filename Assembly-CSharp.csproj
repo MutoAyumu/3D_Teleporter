@@ -54,6 +54,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\AssetStoreTools\UI pack\Scripts\FillValueNumber.cs" />
+    <Compile Include="Assets\AudioMixer\Script\AudioController.cs" />
     <Compile Include="Assets\Scripts\EnergyBulletGenerator.cs" />
     <Compile Include="Assets\Scripts\EnergyBulletReceptor.cs" />
     <Compile Include="Assets\Scripts\EnergyBulletScript.cs" />

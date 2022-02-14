@@ -56,8 +56,14 @@ public class GameManager : MonoBehaviour
     }
     public void StageChange(string name)
     {
+        var audio = GameObject.FindObjectOfType<AudioController>().transform.GetChild(0).gameObject;
         _panel.raycastTarget = true;
-        _tweener = DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(name));
+        _tweener = DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value)
+            .OnComplete(() =>
+            {
+                audio.gameObject.SetActive(false);
+                SceneManager.LoadScene(name);
+            });
     }
     public void Option()
     {
