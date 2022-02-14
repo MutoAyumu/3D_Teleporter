@@ -2990,9 +2990,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85724d19594859848a3c2a8d1bdb51b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cameraSpeed: 3
+  _cameraSpeed: 2
   _cameraValue: {x: -75, y: 75}
-  _slerpSpeed: 15
+  _slerpSpeed: 13
   _eye: {fileID: 9191626032821837883}
   _body: {fileID: 919132149417505822}
   _gunModel: {fileID: 1434856382}
@@ -3033,7 +3033,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9191626032807756160}
-  m_Material: {fileID: 13400000, guid: 084b0731e3706ad4193628c148cb67be, type: 2}
+  m_Material: {fileID: 13400000, guid: d4623de09807cbf40a42255da107a3bb, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3718109
