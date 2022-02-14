@@ -53,11 +53,6 @@ public class SetUpPortal : MonoBehaviour
 
         if(hit.collider != null && hit.collider.gameObject.layer != _wallLayer)
         {
-            if(hit.collider.gameObject.layer == _portalLayer)
-            {
-                //ここ必要かわからんから後回しにするわ
-            }
-
             //カメラの向きをポータルの方向と合わせる
             var cameraRotation = _player.TargetRotation;
             var portalRight = cameraRotation * Vector3.right;

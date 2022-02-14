@@ -97,7 +97,7 @@ public class PlayerController : PortalableObject
     {
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-
+        
         _dir = Vector3.forward * v + Vector3.right * h;
     }
     /// <summary>動きの更新</summary>
@@ -105,7 +105,6 @@ public class PlayerController : PortalableObject
     {
         if (_dir == Vector3.zero)//止まっているとき
         {
-            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
             _gunModel.SetBool("Walk", false);
 
             if (isGround)
