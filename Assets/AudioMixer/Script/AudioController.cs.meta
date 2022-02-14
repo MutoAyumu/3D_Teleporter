@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c578ba98a9a692d43a9ef4626bef22f6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _canvas: {fileID: 7978246443919418957, guid: 50d890716c7e05345a78d160a75f949e,
+      type: 3}
+  - _audioMixer: {fileID: 24100000, guid: a4ffe406233c73b4a94cf610137d09ac, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
