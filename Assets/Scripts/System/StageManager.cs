@@ -29,12 +29,20 @@ public class StageManager : MonoBehaviour
     {
         //ここにDoTweenでいい感じになるようにお願いします
         _panel.raycastTarget = true;
-        DOVirtual.Color(_panel.color, new Color(0,0,0,1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(name));
+        DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(name));
     }
     public void StageChange()
     {
         //ここにDoTweenでいい感じになるようにお願いします
         _panel.raycastTarget = true;
         DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(_stageNum));
+    }
+    public void GameExit()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
     }
 }

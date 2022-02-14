@@ -3164,7 +3164,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _crosshair: {fileID: 0}
-  _rayDistance: 20
+  _rayDistance: 50
   _gunModel: {fileID: 1434856382}
   _shootAudio: {fileID: 7271179228748360593}
   _player: {fileID: 9191626032807756162}

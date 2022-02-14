@@ -37,6 +37,7 @@ public class AudioController : MonoBehaviour
         SetMaster(_startVolumeMaster);
         SetBGM(_startVolumeBGM);
         SetSE(_startVolumeSE);
+        _canvas.gameObject.SetActive(false);
     }
 
     private void Update()
