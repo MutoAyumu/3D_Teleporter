@@ -57,10 +57,8 @@ public class MovingFloor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
-        {
             _count = (_count + 1) % _points.Length;
-        }
+        
     }
     private void OnCollisionEnter(Collision collision)
     {
