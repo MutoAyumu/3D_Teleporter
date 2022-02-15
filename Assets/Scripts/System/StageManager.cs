@@ -14,28 +14,44 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
-        _panel.color = new Color(0, 0, 0, 0);
-        _panel.raycastTarget = false;
+        _panel.color = new Color(0, 0, 0, 1);
+        _panel.raycastTarget = true;
         Cursor.lockState = CursorLockMode.None;
     }
     private void Start()
     {
-        for (int i = 0; i < _stageNum; i++)
-        {
-            _selectButton[i].SetActive(true);
-        }
+        DOVirtual.Color(_panel.color, new Color(0, 0, 0, 0), _changeDuration, value => _panel.color = value)
+            .OnComplete(() =>
+            {
+                _panel.raycastTarget = false;
+
+                for (int i = 0; i < _stageNum; i++)
+                {
+                    _selectButton[i].SetActive(true);
+                }
+            });
     }
     public void StageChange(string name)
     {
         //ここにDoTweenでいい感じになるようにお願いします
         _panel.raycastTarget = true;
-        DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(name));
+        AudioController._instance.transform.GetChild(0).gameObject.SetActive(false);
+        DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value)
+            .OnComplete(() =>
+            {
+                SceneManager.LoadScene(name);
+             });
     }
     public void StageChange()
     {
         //ここにDoTweenでいい感じになるようにお願いします
         _panel.raycastTarget = true;
-        DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value).OnComplete(() => SceneManager.LoadScene(_stageNum));
+        AudioController._instance.transform.GetChild(0).gameObject.SetActive(false);
+        DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value)
+            .OnComplete(() =>
+            {
+                SceneManager.LoadScene(_stageNum);
+            });
     }
     public void GameExit()
     {

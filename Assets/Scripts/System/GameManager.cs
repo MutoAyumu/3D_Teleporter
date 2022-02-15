@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] int _nextChapterNumber;
     [SerializeField] Image _panel = default;
-    [SerializeField] float _changeDuration = 3f;
+    [SerializeField] float _changeDuration = 1f;
     [SerializeField] string _nextSceneName = " ";
     [SerializeField] Image _optionImage = default;
     [SerializeField] string _optionName = "Cancel";
@@ -32,9 +32,18 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        _panel.color = new Color(0, 0, 0, 0);
-        _panel.raycastTarget = false;
+        _panel.color = new Color(0, 0, 0, 1);
+        _panel.raycastTarget = true;
         _optionImage.gameObject.SetActive(false);
+    }
+    private void Start()
+    {
+        _panel.raycastTarget = true;
+        _tweener = DOVirtual.Color(_panel.color, new Color(0, 0, 0, 0), _changeDuration, value => _panel.color = value)
+            .OnComplete(() =>
+            {
+                _panel.raycastTarget = false;
+            });
     }
     private void Update()
     {
@@ -56,12 +65,11 @@ public class GameManager : MonoBehaviour
     }
     public void StageChange(string name)
     {
-        var audio = GameObject.FindObjectOfType<AudioController>().transform.GetChild(0).gameObject;
         _panel.raycastTarget = true;
+        AudioController._instance.transform.GetChild(0).gameObject.SetActive(false);
         _tweener = DOVirtual.Color(_panel.color, new Color(0, 0, 0, 1), _changeDuration, value => _panel.color = value)
             .OnComplete(() =>
             {
-                audio.gameObject.SetActive(false);
                 SceneManager.LoadScene(name);
             });
     }
