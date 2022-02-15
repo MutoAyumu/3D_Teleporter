@@ -2997,14 +2997,14 @@ MonoBehaviour:
   _body: {fileID: 919132149417505822}
   _gunModel: {fileID: 1434856382}
   _playerAnim: {fileID: 386733038}
-  _moveSpeed: 5
-  _jumpPower: 30
+  _moveSpeed: 4
+  _jumpPower: 28
   _settingButtonName: Jump
   _hitPoint: 100
   _recoveryTime: 3
   _recoverPoint: 5
   _footPos: {fileID: 9191626032924988964}
-  _rayDistance: {x: 0, y: -0.5, z: 0}
+  _rayDistance: {x: 0, y: -0.35, z: 0}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 65792
