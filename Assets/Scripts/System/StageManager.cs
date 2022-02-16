@@ -16,6 +16,7 @@ public class StageManager : MonoBehaviour
     {
         _panel.color = new Color(0, 0, 0, 1);
         _panel.raycastTarget = true;
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
     private void Start()
