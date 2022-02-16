@@ -50,7 +50,6 @@ public class PlayerController : PortalableObject
     protected override void Awake()
     {
         base.Awake();
-        Cursor.lockState = CursorLockMode.Locked;
         TargetRotation = this.transform.rotation;
         _anim = _body.GetComponent<Animator>();
         _animSpeed = _anim.speed;

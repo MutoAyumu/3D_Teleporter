@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
         _panel.color = new Color(0, 0, 0, 1);
         _panel.raycastTarget = true;
         _optionImage.gameObject.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void Start()
     {
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
             PauseResume();
             _optionImage.gameObject.SetActive(false);
             _portalImage.gameObject.SetActive(true);
+            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             _tweener.Play();
         }
@@ -88,6 +91,7 @@ public class GameManager : MonoBehaviour
             PauseResume();
             _optionImage.gameObject.SetActive(true);
             _portalImage.gameObject.SetActive(false);
+            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             _tweener.Pause();
         }
