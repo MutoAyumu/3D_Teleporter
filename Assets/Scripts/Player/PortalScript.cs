@@ -50,12 +50,15 @@ public class PortalScript : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        var obj = other.GetComponent<PortalableObject>();
-
-        if(obj != null)
+        if (OtherPortal.IsPlaced())
         {
-            _portalObjects.Add(obj);
-            obj.SetInPortal(this, OtherPortal, _wallCollider);
+            var obj = other.GetComponent<PortalableObject>();
+
+            if (obj != null)
+            {
+                _portalObjects.Add(obj);
+                obj.SetInPortal(this, OtherPortal, _wallCollider);
+            }
         }
     }
     private void OnTriggerExit(Collider other)

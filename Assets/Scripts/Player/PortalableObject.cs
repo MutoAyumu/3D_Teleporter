@@ -55,6 +55,7 @@ public class PortalableObject : MonoBehaviour
         }
         else
         {
+            //遠くの方に置いておく
             _cloneObject.transform.position = new Vector3(-1000.0f, 1000.0f, -1000.0f);
         }
     }
@@ -63,7 +64,7 @@ public class PortalableObject : MonoBehaviour
         _inPortal = inPortal;
         _outPortal = outPortal;
 
-        //
+        //自身と壁との当たり判定をなくす
         Physics.IgnoreCollision(_collider, wallCollider);
 
         ++_inPortalCount;
@@ -101,12 +102,11 @@ public class PortalableObject : MonoBehaviour
         relativeRot = _halfTurn * relativeRot;
         this.transform.rotation = outRot * relativeRot;
 
-        var warpPower = 1.05f;
         //ポータルに入っているオブジェクトの方向ベクトルをinTransformのローカル座標に変換
         Vector3 relativeVel = inTransform.InverseTransformDirection(_rb.velocity);
         relativeVel = _halfTurn * relativeVel;
         //relativeVelをoutTransformのワールド座標に変換
-        _rb.velocity = outTransform.TransformDirection(relativeVel) * warpPower;
+        _rb.velocity = outTransform.TransformDirection(relativeVel);
 
         var tmp = _inPortal;
         _inPortal = _outPortal;

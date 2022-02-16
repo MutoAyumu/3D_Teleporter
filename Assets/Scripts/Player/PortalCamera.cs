@@ -33,6 +33,7 @@ public class PortalCamera : MonoBehaviour
 
     private void OnPreRender()
     {
+        //この辺は無駄なレンダリングをしないため
         if (!portals[0].IsPlaced() || !portals[1].IsPlaced())
         {
             return;
@@ -68,12 +69,14 @@ public class PortalCamera : MonoBehaviour
 
         for (int i = 0; i <= iterationID; ++i)
         {
-            // Position the camera behind the other portal.
+            // もう一方のポータルの後ろにカメラを配置
+            //InverseTransformPoint(位置をワールド→ローカルへと変える)
             Vector3 relativePos = inTransform.InverseTransformPoint(cameraTransform.position);
             relativePos = Quaternion.Euler(0.0f, 180.0f, 0.0f) * relativePos;
             cameraTransform.position = outTransform.TransformPoint(relativePos);
 
-            // Rotate the camera to look through the other portal.
+            // カメラを回転させて、もう一方のポータルを覗く
+            //Quaternion.Inverse(逆のQuaternionを作る)
             Quaternion relativeRot = Quaternion.Inverse(inTransform.rotation) * cameraTransform.rotation;
             relativeRot = Quaternion.Euler(0.0f, 180.0f, 0.0f) * relativeRot;
             cameraTransform.rotation = outTransform.rotation * relativeRot;

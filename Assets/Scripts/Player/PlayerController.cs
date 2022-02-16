@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 /// <summary>プレイヤーにつける</summary>
 public class PlayerController : PortalableObject
@@ -29,6 +30,7 @@ public class PlayerController : PortalableObject
     [SerializeField] LayerMask _groundLayer = default;
     [SerializeField] PostProcessVolume _playerVolume = default;
     [SerializeField] string _respawnTag = "Respawn";
+    [SerializeField] Image _respawnPanel = default;
 
     Vignette _vignette;
     ChromaticAberration _chromatic;
@@ -58,6 +60,7 @@ public class PlayerController : PortalableObject
         _vignette = profile.GetSetting<Vignette>();
         _chromatic = profile.GetSetting<ChromaticAberration>();
         _respawnPos = this.transform.position;
+        _respawnPanel.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -180,6 +183,9 @@ public class PlayerController : PortalableObject
                 _playerAnim.SetBool("Dead", isDead);
                 _rb.velocity = Vector3.zero;
                 _body.SetActive(false);
+                _respawnPanel.gameObject.SetActive(true);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             }
         }
     }
