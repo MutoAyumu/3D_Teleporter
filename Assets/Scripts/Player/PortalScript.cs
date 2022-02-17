@@ -8,7 +8,7 @@ public class PortalScript : MonoBehaviour
     [SerializeField] Renderer _outlineRenderer = default;
     [SerializeField] Color _portalColor = default;
     [SerializeField] LayerMask _placementMask = default;
-    [SerializeField] Transform _testTransform = default;
+    [SerializeField] Transform _judgmentPos = default;
     [SerializeField] float _delay = 0.001f;
     [SerializeField] ParticleSystem _particle = default;
     [SerializeField] Animator _setAnim = default;
@@ -20,9 +20,9 @@ public class PortalScript : MonoBehaviour
     Collider _collider = default;
     List<PortalableObject> _portalObjects = new List<PortalableObject>();
 
-    public PortalScript OtherPortal { get => _otherPortal; set => _otherPortal = value; }
-    public Color PortalColor { get => _portalColor; set => _portalColor = value; }
-    public Renderer Renderer { get => _renderer; set => _renderer = value; }
+    public PortalScript OtherPortal { get => _otherPortal; }
+    public Color PortalColor { get => _portalColor;}
+    public Renderer Renderer { get => _renderer;}
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class PortalScript : MonoBehaviour
             //ポータル内に入っているオブジェクトの座標をポータルのローカル座標に変更
             Vector3 obj = transform.InverseTransformPoint(_portalObjects[i].transform.position);
 
-            if(obj.z > _delay)
+            if(obj.z > 0.0f)
             {
                 _portalObjects[i].Warp();
             }
@@ -57,7 +57,7 @@ public class PortalScript : MonoBehaviour
             if (obj != null)
             {
                 _portalObjects.Add(obj);
-                obj.SetInPortal(this, OtherPortal, _wallCollider);
+                obj.EnterPortal(this, OtherPortal, _wallCollider);
             }
         }
     }
@@ -76,24 +76,28 @@ public class PortalScript : MonoBehaviour
         _material.mainTexture = tex;
     }
 
+    /// <summary>カメラに写っているかをboolで返す</summary>
+    /// <returns></returns>
     public bool IsRendererVisible()
     {
         return _renderer.isVisible;
     }
+    /// <summary>ポータルを配置する</summary>
+    /// <param name="wallCollider"></param>
+    /// <param name="pos"></param>
+    /// <param name="rot"></param>
+    /// <returns></returns>
     public bool PlacePortal(Collider wallCollider, Vector3 pos, Quaternion rot)
     {
-        _testTransform.position = pos;
-        _testTransform.rotation = rot;
-        _testTransform.position -= _testTransform.forward * _delay;
-
-        FixOverhangs();
-        FixIntersects();
+        _judgmentPos.position = pos;
+        _judgmentPos.rotation = rot;
+        _judgmentPos.position -= _judgmentPos.forward * _delay;
 
         if(CheckOverlap())
         {
             _wallCollider = wallCollider;
-            transform.position = _testTransform.position;
-            transform.rotation = _testTransform.rotation;
+            transform.position = _judgmentPos.position;
+            transform.rotation = _judgmentPos.rotation;
 
             gameObject.SetActive(true);
             _setAnim.Play("SetPortalAnim");
@@ -102,89 +106,31 @@ public class PortalScript : MonoBehaviour
         }
 
         //Portalを置けない時にパーティクルを出す
-        _particle.transform.position = _testTransform.position;
+        _particle.transform.position = _judgmentPos.position;
         _particle.Play();
         return false;
     }
-    void FixOverhangs()
-    {
-        var testPoints = new List<Vector3>
-        {
-            new Vector3(-1.1f,  0.0f, 0.1f),
-            new Vector3( 1.1f,  0.0f, 0.1f),
-            new Vector3( 0.0f, -2.1f, 0.1f),
-            new Vector3( 0.0f,  2.1f, 0.1f)
-        };
-
-        var testDirs = new List<Vector3>
-        {
-             Vector3.right,
-            -Vector3.right,
-             Vector3.up,
-            -Vector3.up
-        };
-
-        for(int i = 0; i < 4; ++i)
-        {
-            RaycastHit hit;
-            Vector3 rayPos = _testTransform.TransformPoint(testPoints[i]);
-            Vector3 rayDir = _testTransform.TransformDirection(testDirs[i]);
-
-            if(Physics.CheckSphere(rayPos, 0.05f, _placementMask))
-            {
-                break;
-            }
-            else if(Physics.Raycast(rayPos, rayDir, out hit, 2.1f, _placementMask))
-            {
-                var offset = hit.point - rayPos;
-                _testTransform.Translate(offset, Space.World);
-            }
-        }
-    }
-    void FixIntersects()
-    {
-        var testDirs = new List<Vector3>
-        {
-             Vector3.right,
-            -Vector3.right,
-             Vector3.up,
-            -Vector3.up
-        };
-
-        var testDists = new List<float> { 1.1f, 1.1f, 2.1f, 2.1f };
-
-        for (int i = 0; i < 4; ++i)
-        {
-            RaycastHit hit;
-            Vector3 rayPos = _testTransform.TransformPoint(0.0f, 0.0f, -0.1f);
-            Vector3 rayDir = _testTransform.TransformDirection(testDirs[i]);
-
-            if (Physics.Raycast(rayPos, rayDir, out hit, testDists[i], _placementMask))
-            {
-                var offset = (hit.point - rayPos);
-                var newOffset = -rayDir * (testDists[i] - offset.magnitude);
-                _testTransform.Translate(newOffset, Space.World);
-            }
-        }
-    }
+    /// <summary>ポータルが重なっているかを判断</summary>
+    /// <returns></returns>
     bool CheckOverlap()
     {
+        //チェックする範囲
         var checkExtents = new Vector3(0.9f, 1.9f, 0.05f);
 
         var checkPositions = new Vector3[]
         {
-            _testTransform.position + _testTransform.TransformVector(new Vector3( 0.0f,  0.0f, -0.1f)),
+            _judgmentPos.position + _judgmentPos.TransformVector(new Vector3( 0.0f,  0.0f, -0.1f)),
 
-            _testTransform.position + _testTransform.TransformVector(new Vector3(-1.0f, -2.0f, -0.1f)),
-            _testTransform.position + _testTransform.TransformVector(new Vector3(-1.0f,  2.0f, -0.1f)),
-            _testTransform.position + _testTransform.TransformVector(new Vector3( 1.0f, -2.0f, -0.1f)),
-            _testTransform.position + _testTransform.TransformVector(new Vector3( 1.0f,  2.0f, -0.1f)),
+            _judgmentPos.position + _judgmentPos.TransformVector(new Vector3(-1.0f, -2.0f, -0.1f)),
+            _judgmentPos.position + _judgmentPos.TransformVector(new Vector3(-1.0f,  2.0f, -0.1f)),
+            _judgmentPos.position + _judgmentPos.TransformVector(new Vector3( 1.0f, -2.0f, -0.1f)),
+            _judgmentPos.position + _judgmentPos.TransformVector(new Vector3( 1.0f,  2.0f, -0.1f)),
 
-            _testTransform.TransformVector(new Vector3(0.0f, 0.0f, 0.2f))
+            _judgmentPos.TransformVector(new Vector3(0.0f, 0.0f, 0.2f))
         };
 
         // ポータルが壁と交差しないようする
-        var intersections = Physics.OverlapBox(checkPositions[0], checkExtents, _testTransform.rotation, _placementMask);
+        var intersections = Physics.OverlapBox(checkPositions[0], checkExtents, _judgmentPos.rotation, _placementMask);
 
         if (intersections.Length > 1)
         {

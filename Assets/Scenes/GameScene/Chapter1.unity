@@ -1065,11 +1065,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1780446194}
     - target: {fileID: 1735756345, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
+      propertyPath: _portalCamera
+      value: 
+      objectReference: {fileID: 1780446194}
+    - target: {fileID: 1735756345, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
       propertyPath: portals.Array.data[0]
       value: 
       objectReference: {fileID: 1802476733}
     - target: {fileID: 1735756345, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
       propertyPath: portals.Array.data[1]
+      value: 
+      objectReference: {fileID: 1182105481}
+    - target: {fileID: 1735756345, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
+      propertyPath: _portals.Array.data[0]
+      value: 
+      objectReference: {fileID: 1802476733}
+    - target: {fileID: 1735756345, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
+      propertyPath: _portals.Array.data[1]
       value: 
       objectReference: {fileID: 1182105481}
     - target: {fileID: 1866739959, guid: 23a30c27d32a07741acb573a0affcf52, type: 3}
