@@ -4,56 +4,51 @@ using UnityEngine;
 
 public class PortalCamera : MonoBehaviour
 {
-    [SerializeField]
-    private PortalScript[] portals = new PortalScript[2];
+    [SerializeField] PortalScript[] _portals = new PortalScript[2];
+    [SerializeField] Camera _portalCamera = default;
+        [SerializeField] int _iterations = 7;
 
-    [SerializeField]
-    private Camera portalCamera;
-
-    private RenderTexture tempTexture1;
-    private RenderTexture tempTexture2;
-
-    private Camera mainCamera;
-
-    [SerializeField] int iterations = 7;
+    RenderTexture _texture1;
+    RenderTexture _texture2;
+    Camera _mainCamera;
 
     private void Awake()
     {
-        mainCamera = GetComponent<Camera>();
+        _mainCamera = GetComponent<Camera>();
 
-        tempTexture1 = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
-        tempTexture2 = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
+        _texture1 = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
+        _texture2 = new RenderTexture(Screen.width, Screen.height, 24, RenderTextureFormat.ARGB32);
     }
 
     private void Start()
     {
-        portals[0].SetTexture(tempTexture1);
-        portals[1].SetTexture(tempTexture2);
+        _portals[0].SetTexture(_texture1);
+        _portals[1].SetTexture(_texture2);
     }
 
     private void OnPreRender()
     {
         //この辺は無駄なレンダリングをしないため
-        if (!portals[0].IsPlaced() || !portals[1].IsPlaced())
+        if (!_portals[0].IsPlaced() || !_portals[1].IsPlaced())
         {
             return;
         }
 
-        if (portals[0].IsRendererVisible())
+        if (_portals[0].IsRendererVisible())
         {
-            portalCamera.targetTexture = tempTexture1;
-            for (int i = iterations - 1; i >= 0; --i)
+            _portalCamera.targetTexture = _texture1;
+            for (int i = _iterations - 1; i >= 0; --i)
             {
-                RenderCamera(portals[0], portals[1], i);
+                RenderCamera(_portals[0], _portals[1], i);
             }
         }
 
-        if (portals[1].IsRendererVisible())
+        if (_portals[1].IsRendererVisible())
         {
-            portalCamera.targetTexture = tempTexture2;
-            for (int i = iterations - 1; i >= 0; --i)
+            _portalCamera.targetTexture = _texture2;
+            for (int i = _iterations - 1; i >= 0; --i)
             {
-                RenderCamera(portals[1], portals[0], i);
+                RenderCamera(_portals[1], _portals[0], i);
             }
         }
     }
@@ -63,7 +58,7 @@ public class PortalCamera : MonoBehaviour
         Transform inTransform = inPortal.transform;
         Transform outTransform = outPortal.transform;
 
-        Transform cameraTransform = portalCamera.transform;
+        Transform cameraTransform = _portalCamera.transform;
         cameraTransform.position = transform.position;
         cameraTransform.rotation = transform.rotation;
 
@@ -86,12 +81,12 @@ public class PortalCamera : MonoBehaviour
         Plane p = new Plane(-outTransform.forward, outTransform.position);
         Vector4 clipPlane = new Vector4(p.normal.x, p.normal.y, p.normal.z, p.distance);
         Vector4 clipPlaneCameraSpace =
-            Matrix4x4.Transpose(Matrix4x4.Inverse(portalCamera.worldToCameraMatrix)) * clipPlane;
+            Matrix4x4.Transpose(Matrix4x4.Inverse(_portalCamera.worldToCameraMatrix)) * clipPlane;
 
-        var newMatrix = mainCamera.CalculateObliqueMatrix(clipPlaneCameraSpace);
-        portalCamera.projectionMatrix = newMatrix;
+        var newMatrix = _mainCamera.CalculateObliqueMatrix(clipPlaneCameraSpace);
+        _portalCamera.projectionMatrix = newMatrix;
 
         // Render the camera to its render target.
-        portalCamera.Render();
+        _portalCamera.Render();
     }
 }

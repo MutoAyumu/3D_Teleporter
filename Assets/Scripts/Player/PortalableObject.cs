@@ -14,7 +14,7 @@ public class PortalableObject : MonoBehaviour
     Vector3 _velocity;
     protected GameObject _cloneObject;
 
-    protected static readonly Quaternion _halfTurn = Quaternion.Euler(0.0f, 180.0f, 0.0f);
+    protected Quaternion _halfTurn = Quaternion.Euler(0.0f, 180.0f, 0.0f);
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -59,7 +59,7 @@ public class PortalableObject : MonoBehaviour
             _cloneObject.transform.position = new Vector3(-1000.0f, 1000.0f, -1000.0f);
         }
     }
-    public void SetInPortal(PortalScript inPortal, PortalScript outPortal, Collider wallCollider)
+    public void EnterPortal(PortalScript inPortal, PortalScript outPortal, Collider wallCollider)
     {
         _inPortal = inPortal;
         _outPortal = outPortal;
