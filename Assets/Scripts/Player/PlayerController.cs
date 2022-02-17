@@ -48,11 +48,11 @@ public class PlayerController : PortalableObject
     float _currentHP;
     float _timer;
 
-    public Quaternion TargetRotation { get => _targetRotation; set => _targetRotation = value; }
+    public Quaternion TargetRotation { get => _targetRotation;}
     protected override void Awake()
     {
         base.Awake();
-        TargetRotation = this.transform.rotation;
+        _targetRotation = this.transform.rotation;
         _anim = _body.GetComponent<Animator>();
         _animSpeed = _anim.speed;
         _currentHP = _hitPoint;
@@ -87,7 +87,7 @@ public class PlayerController : PortalableObject
         }
 
         targetEuler.x = Mathf.Clamp(targetEuler.x, _cameraValue.x, _cameraValue.y);//指定した範囲の値に制限する為
-        TargetRotation = Quaternion.Euler(targetEuler);//回転用のQuaternionを作成
+        _targetRotation = Quaternion.Euler(targetEuler);//回転用のQuaternionを作成
 
         _eye.rotation = Quaternion.Slerp(_eye.rotation, TargetRotation, Time.deltaTime * _slerpSpeed);
         var dir = _eye.rotation;
@@ -250,7 +250,7 @@ public class PlayerController : PortalableObject
     public override void Warp()
     {
         base.Warp();
-        TargetRotation = Quaternion.LookRotation(_eye.transform.forward, Vector3.up);
+        _targetRotation = Quaternion.LookRotation(_eye.transform.forward, Vector3.up);
     }
     protected override void Pause()
     {

@@ -37,7 +37,7 @@ public class PortalScript : MonoBehaviour
     }
     private void Update()
     {
-        for(int i = 0; i < _portalObjects.Count; ++i)
+        for(int i = 0; i < _portalObjects.Count; i++)
         {
             //ポータル内に入っているオブジェクトの座標をポータルのローカル座標に変更
             Vector3 obj = transform.InverseTransformPoint(_portalObjects[i].transform.position);
@@ -114,18 +114,25 @@ public class PortalScript : MonoBehaviour
     /// <returns></returns>
     bool CheckOverlap()
     {
+        //ここの辺りの数値はポータル用のメッシュの大きさを考えている
         //チェックする範囲
         var checkExtents = new Vector3(0.9f, 1.9f, 0.05f);
 
         var checkPositions = new Vector3[]
         {
+            //transform.TransformVector()
+            //()内のベクトルをローカルからワールド系に変換させる
+            //中心奥
             _judgmentPos.position + _judgmentPos.TransformVector(new Vector3( 0.0f,  0.0f, -0.1f)),
-
+            //左下
             _judgmentPos.position + _judgmentPos.TransformVector(new Vector3(-1.0f, -2.0f, -0.1f)),
+            //左上
             _judgmentPos.position + _judgmentPos.TransformVector(new Vector3(-1.0f,  2.0f, -0.1f)),
+            //右下
             _judgmentPos.position + _judgmentPos.TransformVector(new Vector3( 1.0f, -2.0f, -0.1f)),
+            //右上
             _judgmentPos.position + _judgmentPos.TransformVector(new Vector3( 1.0f,  2.0f, -0.1f)),
-
+            //中央手前
             _judgmentPos.TransformVector(new Vector3(0.0f, 0.0f, 0.2f))
         };
 
@@ -148,7 +155,7 @@ public class PortalScript : MonoBehaviour
         // Portalの端が表面に重なるようにする
         bool isOverlapping = true;
 
-        for (int i = 1; i < checkPositions.Length - 1; ++i)
+        for (int i = 1; i < checkPositions.Length - 1; i++)
         {
             isOverlapping &= Physics.Linecast(checkPositions[i],
                 checkPositions[i] + checkPositions[checkPositions.Length - 1], _placementMask);

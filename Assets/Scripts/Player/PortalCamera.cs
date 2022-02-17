@@ -37,7 +37,7 @@ public class PortalCamera : MonoBehaviour
         if (_portals[0].IsRendererVisible())
         {
             _portalCamera.targetTexture = _texture1;
-            for (int i = _iterations - 1; i >= 0; --i)
+            for (int i = _iterations - 1; i >= 0; i--)
             {
                 RenderCamera(_portals[0], _portals[1], i);
             }
@@ -46,7 +46,7 @@ public class PortalCamera : MonoBehaviour
         if (_portals[1].IsRendererVisible())
         {
             _portalCamera.targetTexture = _texture2;
-            for (int i = _iterations - 1; i >= 0; --i)
+            for (int i = _iterations - 1; i >= 0; i--)
             {
                 RenderCamera(_portals[1], _portals[0], i);
             }
@@ -62,7 +62,7 @@ public class PortalCamera : MonoBehaviour
         cameraTransform.position = transform.position;
         cameraTransform.rotation = transform.rotation;
 
-        for (int i = 0; i <= iterationID; ++i)
+        for (int i = 0; i <= iterationID; i++)
         {
             // もう一方のポータルの後ろにカメラを配置
             //InverseTransformPoint(位置をワールド→ローカルへと変える)
